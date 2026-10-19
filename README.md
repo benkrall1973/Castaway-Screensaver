@@ -107,7 +107,7 @@ They are **not** vendored in this repository — clone the upstreams to compare:
 
 Prebuilt binaries are published on each version tag by the release workflow. The Windows
 download is a `CastawayContinuum-windows-x86_64.zip` folder containing `CastawayContinuum.exe`, `CastawayContinuum.scr`, a
-`data` folder placeholder, and short setup instructions. See **[docs/INSTALL.md](docs/INSTALL.md)**
+`data` folder placeholder, and short setup instructions. See **[docs/INSTALL-CASTAWAY-CONTINUUM.md](docs/INSTALL-CASTAWAY-CONTINUUM.md)**
 to install the Windows screensaver, run on Linux/macOS, and build from source.
 
 > Each release ships a **`SHA256SUMS.txt`** so you can verify your downloads. The Windows

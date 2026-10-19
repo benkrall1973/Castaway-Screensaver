@@ -208,8 +208,12 @@ fn embed_data() {
     println!("cargo:rerun-if-changed={}", dir.display());
 
     let map_path = dir.join("RESOURCE.MAP");
-    let map = fs::read(&map_path)
-        .unwrap_or_else(|e| panic!("CASTAWAY_CONTINUUM_EMBED_DATA: cannot read {}: {e}", map_path.display()));
+    let map = fs::read(&map_path).unwrap_or_else(|e| {
+        panic!(
+            "CASTAWAY_CONTINUUM_EMBED_DATA: cannot read {}: {e}",
+            map_path.display()
+        )
+    });
 
     // RESOURCE.MAP: 6 unknown bytes, then a 13-byte NUL-padded data file name.
     let data_name: String = map
@@ -227,21 +231,23 @@ fn embed_data() {
     // Resolve the data file. Normally RESOURCE.001 next to the MAP — but the original
     // *installer* stores it compressed as RESOURCE.00$; decompress that on the fly.
     let named = dir.join(&data_name);
-    let data_path: PathBuf =
-        if named.is_file() && fs::metadata(&named).map(|m| m.len()).unwrap_or(0) > 1000 {
-            named
-        } else if let Ok(comp) = fs::read(dir.join("RESOURCE.00$")) {
-            let data = wilson_dgds::decompress_installer(&comp)
-                .expect("CASTAWAY_CONTINUUM_EMBED_DATA: RESOURCE.00$ present but could not be decompressed");
-            let p = out_parent.join("RESOURCE.001");
-            fs::write(&p, &data).expect("write decompressed RESOURCE.001");
-            p
-        } else {
-            panic!(
+    let data_path: PathBuf = if named.is_file()
+        && fs::metadata(&named).map(|m| m.len()).unwrap_or(0) > 1000
+    {
+        named
+    } else if let Ok(comp) = fs::read(dir.join("RESOURCE.00$")) {
+        let data = wilson_dgds::decompress_installer(&comp).expect(
+            "CASTAWAY_CONTINUUM_EMBED_DATA: RESOURCE.00$ present but could not be decompressed",
+        );
+        let p = out_parent.join("RESOURCE.001");
+        fs::write(&p, &data).expect("write decompressed RESOURCE.001");
+        p
+    } else {
+        panic!(
                 "CASTAWAY_CONTINUUM_EMBED_DATA: data file {} not found (and no RESOURCE.00$ installer file)",
                 named.display()
             );
-        };
+    };
 
     // Embed whichever soundN.wav are present (0..=24; the originals skip 11 and 13).
     let mut entries: Vec<(u16, PathBuf)> = Vec::new();

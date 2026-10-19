@@ -624,8 +624,9 @@ impl Config {
     /// Persist the config. Callers can surface the error instead of silently
     /// pretending that a setting was saved when Windows refused the write.
     pub fn save(&self) -> Result<(), String> {
-        let canonical = config_file()
-            .ok_or_else(|| "Castaway Continuum could not determine its settings folder.".to_owned())?;
+        let canonical = config_file().ok_or_else(|| {
+            "Castaway Continuum could not determine its settings folder.".to_owned()
+        })?;
         self.save_to(&canonical)?;
         remove_legacy_config_files(&legacy_config_files(&canonical));
         Ok(())
@@ -1514,7 +1515,10 @@ fn remove_legacy_config_files(paths: &[PathBuf]) {
         // Keep the old per-user INI intact after copying it beside the EXE/SCR.
         // A user may have more than one portable installation, and deleting the
         // only prior settings copy is a rotten migration strategy.
-        if path.file_name().is_some_and(|name| name == "castaway-continuum.ini") {
+        if path
+            .file_name()
+            .is_some_and(|name| name == "castaway-continuum.ini")
+        {
             continue;
         }
         let _ = std::fs::remove_file(path);
@@ -1670,7 +1674,9 @@ mod tests {
         let exe = Path::new(r"C:\Games\Johnny Castaway\JohnnyCastaway.scr");
         assert_eq!(
             config_file_for_executable(exe),
-            Some(PathBuf::from(r"C:\Games\Johnny Castaway\castaway-continuum.ini"))
+            Some(PathBuf::from(
+                r"C:\Games\Johnny Castaway\castaway-continuum.ini"
+            ))
         );
     }
 

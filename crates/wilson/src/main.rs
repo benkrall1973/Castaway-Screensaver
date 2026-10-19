@@ -844,7 +844,9 @@ fn open_custom_dialog(custom: &mut Option<Child>) {
             Ok(child) => *custom = Some(child),
             Err(error) => eprintln!("[castaway-continuum] Could not open Custom Settings: {error}"),
         },
-        Err(error) => eprintln!("[castaway-continuum] Could not locate Custom Settings executable: {error}"),
+        Err(error) => {
+            eprintln!("[castaway-continuum] Could not locate Custom Settings executable: {error}")
+        }
     }
 }
 
@@ -2559,7 +2561,9 @@ fn print_help() {
     println!("  wilson --data <DIR> [OPTIONS]     use the original game data in <DIR>\n");
     println!("DATA (required):");
     println!("  Needs the original files RESOURCE.MAP + RESOURCE.001 (and soundN.wav for");
-    println!("  sound). Located via --data <DIR>, the CASTAWAY_CONTINUUM_DATA_DIR env var, the current");
+    println!(
+        "  sound). Located via --data <DIR>, the CASTAWAY_CONTINUUM_DATA_DIR env var, the current"
+    );
     println!("  directory, or next to the executable; file names match case-insensitively.\n");
     println!("OPTIONS:");
     println!("  {help_flags:<33}show this help and exit");

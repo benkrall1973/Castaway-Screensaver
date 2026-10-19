@@ -1,4 +1,4 @@
-# Windows Build Guide
+# Castaway Continuum V1.0.0 Windows Build Guide
 
 This guide builds the Windows desktop application from the complete GPL source in
 this repository. It does not provide, download, or redistribute the original
@@ -22,13 +22,13 @@ with Rust.
 ```powershell
 $rustLld = 'C:\Users\<you>\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib\rustlib\x86_64-pc-windows-msvc\bin\rust-lld.exe'
 $env:RUSTFLAGS = "-C linker=$rustLld"
-rustup run stable-x86_64-pc-windows-msvc cargo build --release -p wilson --target x86_64-pc-windows-msvc -j 1
+rustup run stable-x86_64-pc-windows-msvc cargo build --release -p castaway-continuum --target x86_64-pc-windows-msvc -j 1
 ```
 
 The resulting application is:
 
 ```text
-target\x86_64-pc-windows-msvc\release\wilson.exe
+target\x86_64-pc-windows-msvc\release\castaway-continuum.exe
 ```
 
 ## Run with your own data
@@ -37,7 +37,7 @@ Place your legally obtained original data beside the executable, in a `data`
 subdirectory, or point to it explicitly:
 
 ```powershell
-.\target\x86_64-pc-windows-msvc\release\wilson.exe --windowed --data C:\path\to\JohnnyCastawayData
+.\target\x86_64-pc-windows-msvc\release\castaway-continuum.exe --windowed --data C:\path\to\JohnnyCastawayData
 ```
 
 The application looks for `RESOURCE.MAP` and `RESOURCE.001`. It can also use the
@@ -52,7 +52,7 @@ your own lawful copy and do not publish the resulting executable.
 $rustLld = 'C:\Users\<you>\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib\rustlib\x86_64-pc-windows-msvc\bin\rust-lld.exe'
 $env:RUSTFLAGS = "-C linker=$rustLld"
 $env:CASTAWAY_CONTINUUM_EMBED_DATA = 'C:\path\to\your\original\data'
-rustup run stable-x86_64-pc-windows-msvc cargo build --release -p wilson --features embed-data --target x86_64-pc-windows-msvc -j 1
+rustup run stable-x86_64-pc-windows-msvc cargo build --release -p castaway-continuum --features embed-data --target x86_64-pc-windows-msvc -j 1
 ```
 
 ## Checks
@@ -61,7 +61,7 @@ Run source checks before publishing a change:
 
 ```powershell
 cargo fmt --check
-cargo check -p wilson
+cargo check -p castaway-continuum
 ```
 
 The Windows icon is optional. A warning about a missing resource compiler
