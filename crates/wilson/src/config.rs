@@ -580,6 +580,10 @@ impl Config {
 
     /// Reset only the saved Custom-profile choices. General display, window,
     /// audio, scaling, and playback preferences deliberately remain intact.
+    // The native menu is Windows-only. Keep this method available for it
+    // without making non-Windows CI pretend the platform-specific action is
+    // dead application code.
+    #[cfg_attr(not(windows), allow(dead_code))]
     pub fn reset_custom_values(&mut self) {
         let defaults = Self::default();
         self.custom_enabled = false;
@@ -1671,12 +1675,15 @@ mod tests {
 
     #[test]
     fn portable_ini_sits_beside_the_executable_or_screensaver() {
+        // `Path` follows the host platform's separator rules. A Windows path
+        // is one filename on Unix, so use a native fixture on each CI host.
+        #[cfg(windows)]
         let exe = Path::new(r"C:\Games\Johnny Castaway\JohnnyCastaway.scr");
+        #[cfg(not(windows))]
+        let exe = Path::new("/opt/johnny-castaway/JohnnyCastaway");
         assert_eq!(
             config_file_for_executable(exe),
-            Some(PathBuf::from(
-                r"C:\Games\Johnny Castaway\castaway-continuum.ini"
-            ))
+            Some(exe.parent().unwrap().join("castaway-continuum.ini"))
         );
     }
 
