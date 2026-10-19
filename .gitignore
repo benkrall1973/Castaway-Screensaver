@@ -5,11 +5,14 @@
 Cargo.lock.orig
 
 # Original (copyrighted) game data — never commit
-*.MAP
-*.001
-*.SCR
-RESOURCE.*
-SCRANTIC.*
+# Keep these exact original-data names out of Git.  Do not use broad
+# case-insensitive patterns here: on Windows `RESOURCE.*` also ignores the
+# Rust module `crates/wilson-dgds/src/resource.rs`.
+/RESOURCE.MAP
+/RESOURCE.001
+/RESOURCE.00$
+/SCRANTIC.SCR
+/SCRANTIC.SC$
 data/
 # The release-package placeholder is documentation, not game data.
 !/packaging/
