@@ -11,7 +11,8 @@ Cargo.lock.orig
 /RESOURCE.MAP
 /RESOURCE.001
 /RESOURCE.00$
-/SCRANTIC.SCR
+# The primary Windows 3.1 reference binary is intentionally tracked only in
+# this private repository. Never copy it to a public repository or release.
 /SCRANTIC.SC$
 data/
 # The release-package placeholder is documentation, not game data.
