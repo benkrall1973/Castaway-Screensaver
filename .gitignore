@@ -35,3 +35,7 @@ releases/*.exe
 *.swp
 .idea/
 .vscode/
+
+# Python maintenance scripts
+__pycache__/
+*.py[cod]
