@@ -71,12 +71,27 @@ See [INSTALL.md](INSTALL.md) for the Windows package and screensaver setup.
 Run `CastawayContinuum.exe` to configure and preview. Right-click
 `CastawayContinuum.scr` and choose **Install** to register the screensaver.
 
+Before running it, create a `data` folder beside the EXE and SCR and copy the
+complete contents of a lawfully obtained, already installed or extracted Johnny
+Castaway folder into it. Do not use the legacy 16-bit installer executable by
+itself; use the installation folder it produces.
+
 ## Original data is required
 
-This project does **not** include Johnny Castaway artwork, animations, music, or
-sound effects. Supply a legally obtained original data set containing
-`RESOURCE.MAP` and `RESOURCE.001`, normally in a `data` folder beside the EXE
-and SCR. See [docs/BUILD-WINDOWS.md](docs/BUILD-WINDOWS.md) for build details.
+Distributed public packages do **not** include Johnny Castaway artwork,
+animations, music, or sound effects. This private repository also retains
+original reference data and forensic material for development; do not publish
+those private files. Use the complete folder from a lawfully obtained Johnny Castaway
+installation, including an authorized downloaded or archival installation that
+has already been extracted or installed. For the simplest setup, copy **all**
+files from that installation folder into a `data` folder beside the EXE and SCR.
+
+At minimum, `data` must contain `RESOURCE.MAP` and its matching
+`RESOURCE.001` file. Keeping the rest of the installation files together is
+recommended because it preserves optional sound and support data. Do not use the
+legacy 16-bit installer executable by itself; use the folder it produces after
+installation or extraction. See [docs/BUILD-WINDOWS.md](docs/BUILD-WINDOWS.md)
+for build details.
 
 ## Build from source
 
