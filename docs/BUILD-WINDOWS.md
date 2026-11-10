@@ -16,8 +16,7 @@ rustup target add x86_64-pc-windows-msvc --toolchain stable-x86_64-pc-windows-ms
 ```
 
 Start a Developer PowerShell for Visual Studio, then run the commands below from
-the repository root. The build has been tested with `rust-lld`, which is included
-with Rust.
+the repository root. The standard MSVC linker is supplied by the Visual Studio C++ build tools.
 
 ```powershell
 rustup run stable-x86_64-pc-windows-msvc cargo build --locked --release -p castaway_screensaver --target x86_64-pc-windows-msvc
@@ -47,8 +46,6 @@ An embedded build contains copyrighted Sierra/Dynamix data. Build it only from
 your own lawful copy and do not publish the resulting executable.
 
 ```powershell
-$rustLld = 'C:\Users\<you>\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib\rustlib\x86_64-pc-windows-msvc\bin\rust-lld.exe'
-$env:RUSTFLAGS = "-C linker=$rustLld"
 $env:CASTAWAY_SCREENSAVER_EMBED_DATA = 'C:\path\to\your\original\data'
 rustup run stable-x86_64-pc-windows-msvc cargo build --release -p castaway_screensaver --features embed-data --target x86_64-pc-windows-msvc -j 1
 ```

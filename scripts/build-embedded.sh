@@ -25,8 +25,8 @@
 #     [out-dir]   output dir (default: target/embedded)
 #
 # From Linux it builds:
-#   * Linux   x86_64  -> wilson-linux-x86_64                  (native)
-#   * Windows x86_64  -> wilson.exe + wilson.scr             (cross via mingw-w64)
+#   * Linux   x86_64  -> Castaway_Screensaver-linux-x86_64                  (native)
+#   * Windows x86_64  -> Castaway_Screensaver.exe + Castaway_Screensaver.scr             (cross via mingw-w64)
 # macOS (binary + .saver) must be built ON a Mac — cross-compiling Apple targets from
 # Linux needs the macOS SDK (osxcross); see docs/INSTALL.md.
 #
@@ -324,8 +324,8 @@ if [ "$do_desktop" -eq 1 ]; then
     echo "==> [Linux] building native embedded binary"
     [ "$alsa_ok" -eq 1 ] || echo "    (warning: ALSA dev not detected — this may fail in alsa-sys; see preflight)"
     cargo build --release -p castaway_screensaver --features embed-data --manifest-path "$ROOT/Cargo.toml"
-    cp "$ROOT/target/release/castaway_screensaver" "$OUT/wilson-linux-x86_64"
-    echo "    ok -> $OUT/wilson-linux-x86_64"
+    cp "$ROOT/target/release/castaway_screensaver" "$OUT/Castaway_Screensaver-linux-x86_64"
+    echo "    ok -> $OUT/Castaway_Screensaver-linux-x86_64"
 
     # --- Windows (cross via mingw-w64) --------------------------------------------
     echo

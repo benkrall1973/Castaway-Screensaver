@@ -28,7 +28,7 @@ Controls
 Data and source
 ---------------
 The original data is copyrighted by Sierra On-Line / Dynamix and is not
-redistributed with this project. Create a data folder beside the EXE and SCR,
+bundled in this release package. Create a data folder beside the EXE and SCR,
 then copy all files from a lawfully obtained, already installed or extracted
 Johnny Castaway folder into it. This includes an authorized Internet/archive
 download after it has been extracted into an installation folder. At minimum,

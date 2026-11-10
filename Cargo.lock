@@ -428,7 +428,7 @@ dependencies = [
 
 [[package]]
 name = "castaway_screensaver"
-version = "1.0.0"
+version = "1.0.2"
 dependencies = [
  "eframe",
  "rodio",
@@ -3667,18 +3667,18 @@ checksum = "72069c3113ab32ab29e5584db3c6ec55d416895e60715417b5b883a357c3e471"
 
 [[package]]
 name = "wilson-dgds"
-version = "1.0.0"
+version = "1.0.2"
 
 [[package]]
 name = "wilson-engine"
-version = "1.0.0"
+version = "1.0.2"
 dependencies = [
  "wilson-dgds",
 ]
 
 [[package]]
 name = "wilson-saver"
-version = "1.0.0"
+version = "1.0.2"
 dependencies = [
  "wilson-dgds",
  "wilson-engine",
@@ -3686,7 +3686,7 @@ dependencies = [
 
 [[package]]
 name = "wilson-web"
-version = "1.0.0"
+version = "1.0.2"
 dependencies = [
  "wasm-bindgen",
  "wilson-dgds",
