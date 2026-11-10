@@ -105,7 +105,7 @@ The Windows application uses Rust and the MSVC toolchain. From a Developer
 PowerShell for Visual Studio:
 
 ```powershell
-rustup run stable-x86_64-pc-windows-msvc cargo build --locked --release -p castaway_screensaver --target x86_64-pc-windows-msvc
+rustup run 1.99.1-x86_64-pc-windows-msvc cargo build --locked --release -p castaway_screensaver --target x86_64-pc-windows-msvc
 ```
 
 The built executable is placed at

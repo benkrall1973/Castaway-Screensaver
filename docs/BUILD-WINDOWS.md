@@ -11,15 +11,15 @@ toolchain is required for a reliable local Windows build; this checkout's defaul
 GNU toolchain may fail at link time when `dlltool.exe` is not available.
 
 ```powershell
-rustup toolchain install stable-x86_64-pc-windows-msvc
-rustup target add x86_64-pc-windows-msvc --toolchain stable-x86_64-pc-windows-msvc
+rustup toolchain install 1.99.1-x86_64-pc-windows-msvc
+rustup target add x86_64-pc-windows-msvc --toolchain 1.99.1-x86_64-pc-windows-msvc
 ```
 
 Start a Developer PowerShell for Visual Studio, then run the commands below from
 the repository root. The standard MSVC linker is supplied by the Visual Studio C++ build tools.
 
 ```powershell
-rustup run stable-x86_64-pc-windows-msvc cargo build --locked --release -p castaway_screensaver --target x86_64-pc-windows-msvc
+rustup run 1.99.1-x86_64-pc-windows-msvc cargo build --locked --release -p castaway_screensaver --target x86_64-pc-windows-msvc
 ```
 
 The resulting application is:
@@ -47,7 +47,7 @@ your own lawful copy and do not publish the resulting executable.
 
 ```powershell
 $env:CASTAWAY_SCREENSAVER_EMBED_DATA = 'C:\path\to\your\original\data'
-rustup run stable-x86_64-pc-windows-msvc cargo build --release -p castaway_screensaver --features embed-data --target x86_64-pc-windows-msvc -j 1
+rustup run 1.99.1-x86_64-pc-windows-msvc cargo build --locked --release -p castaway_screensaver --features embed-data --target x86_64-pc-windows-msvc -j 1
 ```
 
 ## Checks
