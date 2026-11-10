@@ -79,6 +79,10 @@ complete contents of a lawfully obtained, already installed or extracted Johnny
 Castaway folder into it. Do not use the legacy 16-bit installer executable by
 itself; use the installation folder it produces.
 
+To keep preferences from an older installation, copy its existing INI to
+`Castaway_Screensaver.ini` before first launch. Back up the old file first.
+The per-user story-state folder also uses the new application name.
+
 ## Original data is required
 
 Distributed public packages do **not** include Johnny Castaway artwork,

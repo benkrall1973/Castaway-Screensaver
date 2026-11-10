@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-10",
+  "source_commit": "cf88717",
+  "release": {
+    "tag": "v1.0.2",
+    "url": "https://github.com/benkrall1973/Castaway_Screensaver/releases/tag/v1.0.2",
+    "assets": [
+      {
+        "name": "Castaway_Screensaver-linux-x86_64.tar.gz",
+        "size": 4172836,
+        "digest": "sha256:33b7784621c77e8221fa1100b94b5b95623efbc41d45e08ce5f221f388c17834"
+      },
+      {
+        "name": "Castaway_Screensaver-macos-arm64.tar.gz",
+        "size": 2386677,
+        "digest": "sha256:c65119c9adb7a8394e8c556d9a1c78de18a70cd73b5953695e0f40707569b35c"
+      },
+      {
+        "name": "Castaway_Screensaver-Windows-x86_64.zip",
+        "size": 5237383,
+        "digest": "sha256:45be182de85600641cdf89afe3990dd02357aa0e468db052ed59529949e4ad84"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 489,
+        "digest": "sha256:060c1f31f330168c8923c665ff3f32a28fef8875a30a3a313b5cc5e95a5e53fa"
+      },
+      {
+        "name": "wilson-web.zip",
+        "size": 129288,
+        "digest": "sha256:2be1e6eca623eb2817e584eb2c74f24a9680025d3d764e0e8c17838c9ae832e1"
+      },
+      {
+        "name": "WilsonReborn.saver.zip",
+        "size": 777886,
+        "digest": "sha256:c32ca964713e21a640b5fc1bf075d5629350eaec8437dfe3415e1767249c1daf"
+      }
+    ]
+  },
+  "ci": {
+    "url": "https://github.com/benkrall1973/Castaway_Screensaver/actions/runs/42918348173",
+    "jobs_passed": 6
+  },
+  "packages": {
+    "url": "https://github.com/benkrall1973/Castaway_Screensaver/actions/runs/42918350775",
+    "jobs_passed": 5
+  },
+  "local_checks": [
+    "Rust formatting",
+    "Shell syntax",
+    "Current tracked text and filenames checked for retired branding",
+    "Relative Markdown links",
+    "Windows rebuilt EXE --help",
+    "Windows EXE and SCR bytes identical",
+    "Release SHA256SUMS validated"
+  ],
+  "limits": [
+    "No graphical screensaver installation or display behavior test performed in this cleanup",
+    "Historical commits and earlier releases retain original names and bytes",
+    "Dependency vulnerability audit not established by these build checks"
+  ]
+}
