@@ -4,15 +4,14 @@
 **/*.rs.bk
 Cargo.lock.orig
 
-# Original (copyrighted) game data — never commit
+# Avoid accidentally adding additional original game data
 # Keep these exact original-data names out of Git.  Do not use broad
 # case-insensitive patterns here: on Windows `RESOURCE.*` also ignores the
 # Rust module `crates/wilson-dgds/src/resource.rs`.
 /RESOURCE.MAP
 /RESOURCE.001
 /RESOURCE.00$
-# The primary Windows 3.1 reference binary is intentionally tracked only in
-# this private repository. Never copy it to a public repository or release.
+# The original Windows 3.1 reference binary is retained separately.
 /SCRANTIC.SC$
 data/
 # The release-package placeholder is documentation, not game data.
@@ -21,8 +20,8 @@ data/
 !/packaging/windows/data/
 !/packaging/windows/data/PUT-ORIGINAL-FILES-HERE.txt
 assets-original/
-# This private repository deliberately includes the owned test resource set so
-# the Castaway Continuum v1.0.0 embedded Windows build is reproducible.
+# This repository deliberately includes the reference test resource set so
+# the Castaway_Screensaver v1.0.0 embedded Windows build is reproducible.
 !/test-original-data/
 releases/*.exe
 # Reference implementations (third-party) are kept only locally, never committed —

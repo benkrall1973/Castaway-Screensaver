@@ -28,8 +28,9 @@ impl DayState {
     /// Persist progress. Failure is recoverable, but callers can now report it
     /// instead of silently restarting the story arc later.
     pub fn save(&self) -> Result<(), String> {
-        let path = state_file()
-            .ok_or_else(|| "Castaway Continuum could not determine its state folder.".to_owned())?;
+        let path = state_file().ok_or_else(|| {
+            "Castaway_Screensaver could not determine its state folder.".to_owned()
+        })?;
         self.save_to(&path)
     }
 
@@ -73,7 +74,7 @@ impl DayState {
 
     fn serialize(&self) -> String {
         format!(
-            "# Castaway Continuum - story progress (the 11-day arc).\ncurrent_day={}\nstored_yday={}\n",
+            "# Castaway_Screensaver - story progress (the 11-day arc).\ncurrent_day={}\nstored_yday={}\n",
             self.current_day, self.stored_yday
         )
     }
@@ -81,15 +82,15 @@ impl DayState {
 
 /// The per-user state directory (zero-dep platform resolution).
 ///
-/// Windows: `%APPDATA%\CastawayContinuum`. Otherwise XDG: `$XDG_STATE_HOME/castaway-continuum`
+/// Windows: `%APPDATA%\Castaway_Screensaver`. Otherwise XDG: `$XDG_STATE_HOME/castaway_screensaver`
 /// or `$HOME/.local/state/wilson-reborn`. Shared with [`crate::config`].
 pub(crate) fn state_dir() -> Option<PathBuf> {
     if cfg!(windows) {
-        std::env::var_os("APPDATA").map(|p| PathBuf::from(p).join("CastawayContinuum"))
+        std::env::var_os("APPDATA").map(|p| PathBuf::from(p).join("Castaway_Screensaver"))
     } else if let Some(xdg) = std::env::var_os("XDG_STATE_HOME") {
-        Some(PathBuf::from(xdg).join("castaway-continuum"))
+        Some(PathBuf::from(xdg).join("castaway_screensaver"))
     } else {
-        std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".local/state/castaway-continuum"))
+        std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".local/state/castaway_screensaver"))
     }
 }
 

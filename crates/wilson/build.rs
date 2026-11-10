@@ -2,13 +2,13 @@
 //! Build script for the `wilson` app.
 //!
 //! * **Windows icon (always, Windows targets):** embed an application icon into the
-//!   executable. By default it is Castaway Continuum's own icon (`assets/wilson.ico`, original
+//!   executable. By default it is Castaway_Screensaver's own icon (`assets/wilson.ico`, original
 //!   art — safe to ship). In a personal `embed-data` build it instead uses the *original*
 //!   Johnny Castaway icon taken from the user's own `SCRANTIC.EXE`/`.SCR` (or a
 //!   `SCRANTIC.ICO`) at build time — copyright, so it is never committed nor shipped in the
 //!   public release binaries.
 //! * **Data embedding (`embed-data` feature):** embed the user's original data
-//!   (`CASTAWAY_CONTINUUM_EMBED_DATA`) into the binary for a self-contained build. The data is read
+//!   (`CASTAWAY_SCREENSAVER_EMBED_DATA`) into the binary for a self-contained build. The data is read
 //!   only at build time from the local path — never written into the repository.
 
 use std::{
@@ -17,7 +17,7 @@ use std::{
 };
 
 fn main() {
-    println!("cargo:rerun-if-env-changed=CASTAWAY_CONTINUUM_EMBED_DATA");
+    println!("cargo:rerun-if-env-changed=CASTAWAY_SCREENSAVER_EMBED_DATA");
 
     embed_windows_icon();
 
@@ -42,7 +42,7 @@ fn embed_windows_icon() {
     // Personal build: prefer the ORIGINAL icon from the user's own data (never committed) —
     // a `SCRANTIC.ICO` if provided, otherwise extracted from the NE `SCRANTIC.EXE`/`.SCR`.
     if env::var_os("CARGO_FEATURE_EMBED_DATA").is_some() {
-        if let Some(dir) = env::var_os("CASTAWAY_CONTINUUM_EMBED_DATA") {
+        if let Some(dir) = env::var_os("CASTAWAY_SCREENSAVER_EMBED_DATA") {
             let dir = Path::new(&dir);
             let provided = dir.join("SCRANTIC.ICO");
             if provided.is_file() {
@@ -189,11 +189,11 @@ fn embed_data() {
 
     // The feature can be enabled without data (e.g. CI's `--all-features`). Emit a
     // compilable stub + a warning so the build still succeeds; the resulting binary
-    // just won't run until built with CASTAWAY_CONTINUUM_EMBED_DATA pointing at real data.
-    let Some(dir) = env::var_os("CASTAWAY_CONTINUUM_EMBED_DATA") else {
+    // just won't run until built with CASTAWAY_SCREENSAVER_EMBED_DATA pointing at real data.
+    let Some(dir) = env::var_os("CASTAWAY_SCREENSAVER_EMBED_DATA") else {
         println!(
-            "cargo:warning=feature `embed-data` is enabled but CASTAWAY_CONTINUUM_EMBED_DATA is unset; \
-             building a stub (this binary will NOT run). Set CASTAWAY_CONTINUUM_EMBED_DATA to embed the \
+            "cargo:warning=feature `embed-data` is enabled but CASTAWAY_SCREENSAVER_EMBED_DATA is unset; \
+             building a stub (this binary will NOT run). Set CASTAWAY_SCREENSAVER_EMBED_DATA to embed the \
              original RESOURCE.* + soundN.wav."
         );
         fs::write(
@@ -210,7 +210,7 @@ fn embed_data() {
     let map_path = dir.join("RESOURCE.MAP");
     let map = fs::read(&map_path).unwrap_or_else(|e| {
         panic!(
-            "CASTAWAY_CONTINUUM_EMBED_DATA: cannot read {}: {e}",
+            "CASTAWAY_SCREENSAVER_EMBED_DATA: cannot read {}: {e}",
             map_path.display()
         )
     });
@@ -237,14 +237,14 @@ fn embed_data() {
         named
     } else if let Ok(comp) = fs::read(dir.join("RESOURCE.00$")) {
         let data = wilson_dgds::decompress_installer(&comp).expect(
-            "CASTAWAY_CONTINUUM_EMBED_DATA: RESOURCE.00$ present but could not be decompressed",
+            "CASTAWAY_SCREENSAVER_EMBED_DATA: RESOURCE.00$ present but could not be decompressed",
         );
         let p = out_parent.join("RESOURCE.001");
         fs::write(&p, &data).expect("write decompressed RESOURCE.001");
         p
     } else {
         panic!(
-                "CASTAWAY_CONTINUUM_EMBED_DATA: data file {} not found (and no RESOURCE.00$ installer file)",
+                "CASTAWAY_SCREENSAVER_EMBED_DATA: data file {} not found (and no RESOURCE.00$ installer file)",
                 named.display()
             );
     };

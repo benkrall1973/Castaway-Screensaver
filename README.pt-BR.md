@@ -34,8 +34,8 @@ O Wilson Reborn usa **os arquivos originais** do Johnny Castaway (`RESOURCE.MAP`
 cada um). Sem os dados, lista onde procurou e sai.
 
 ```bash
-cargo run -p wilson -- --data <dir>              # seus RESOURCE.MAP/RESOURCE.001 originais
-cargo run -p wilson -- --data <dir> --windowed   # em janela 640×480 (dev)
+cargo run -p castaway_screensaver -- --data <dir>              # seus RESOURCE.MAP/RESOURCE.001 originais
+cargo run -p castaway_screensaver -- --data <dir> --windowed   # em janela 640×480 (dev)
 ```
 
 Roda em **tela cheia** por padrão (comportamento de screensaver); qualquer tecla/clique
@@ -97,7 +97,7 @@ workflow de release. Veja **[docs/INSTALL.md](docs/INSTALL.md)** para instalar o
 no Windows, rodar no Linux/macOS e publicar releases.
 
 > **Build autossuficiente (uso pessoal):** quem já tem o jogo original pode embutir os dados
-> no binário com `WILSON_EMBED_DATA=<dir> cargo build --release -p wilson --features
+> no binário com `CASTAWAY_SCREENSAVER_EMBED_DATA=<dir> cargo build --release -p castaway_screensaver --features
 > embed-data` — gera um único arquivo que roda sem `--data`. Os dados são copyright e **não**
 > são redistribuídos; por isso esse build não é publicado nas releases.
 

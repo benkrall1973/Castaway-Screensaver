@@ -1,19 +1,19 @@
-Castaway Continuum for Windows
+Castaway_Screensaver for Windows
 ==============================
 
 This folder is ready to copy to another Windows PC. Keep every file together.
-`castaway-continuum.ini` is deliberately stored beside the EXE/SCR so it can be edited
+`Castaway_Screensaver.ini` is deliberately stored beside the EXE/SCR so it can be edited
 with Notepad and travels with this installation.
 
 Run it
 ------
-1. Double-click CastawayContinuum.exe for a normal windowed/full-screen run.
+1. Double-click Castaway_Screensaver.exe for a normal windowed/full-screen run.
 2. In the Display menu, choose Custom Mode for saved enhancements, or Classic
    Mode for the original scheduling behavior.
 
 Configure it
 ------------
-Use CastawayContinuum.exe as the configuration launcher. Its Display menu opens
+Use Castaway_Screensaver.exe as the configuration launcher. Its Display menu opens
 Custom Settings, where scene selection, island location, lighting, tide, and
 holiday choices are changed. The SCR is intentionally not configurable while
 running: mouse movement, a click, or a key press immediately closes it like a
@@ -24,16 +24,16 @@ the live preview remain available.
 Use it as a Windows screensaver
 -------------------------------
 1. Extract the ZIP completely and keep the whole folder together. Do not move
-  only CastawayContinuum.scr: it needs the sibling CastawayContinuum.exe, castaway-continuum.ini,
+  only Castaway_Screensaver.scr: it needs the sibling Castaway_Screensaver.exe, Castaway_Screensaver.ini,
    and data\\ folder beside it.
-2. Right-click CastawayContinuum.scr and choose Install. Windows registers the
+2. Right-click Castaway_Screensaver.scr and choose Install. Windows registers the
    selected SCR at its current path; it normally runs that exact file and does
    not copy the package into C:\\Windows\\System32.
-3. Right-click CastawayContinuum.scr and choose Test to try it immediately.
-4. In Windows Screen Saver Settings, select Castaway Continuum and use Settings...
+3. Right-click Castaway_Screensaver.scr and choose Test to try it immediately.
+4. In Windows Screen Saver Settings, select Castaway_Screensaver and use Settings...
    to open the sibling EXE in live, windowed configuration mode. Closing that
    window returns to Windows Settings; changes have already been saved to the
-   castaway-continuum.ini in this package folder.
+   Castaway_Screensaver.ini in this package folder.
 
 Keep the installed folder in place
 ----------------------------------
@@ -52,7 +52,7 @@ Notes
 -----
 - Windows may show a SmartScreen warning because this build is not code-signed.
   Use More info > Run anyway only if you trust the package source.
-- `castaway-continuum.ini` contains settings, Favorites, and an editable `[SceneCatalog]`
+- `Castaway_Screensaver.ini` contains settings, Favorites, and an editable `[SceneCatalog]`
   section at the bottom. If a scene entry is blank, missing, or malformed, the
   Custom Settings > Scenes tab shows an orange warning and safely uses the
   built-in wording for that entry.

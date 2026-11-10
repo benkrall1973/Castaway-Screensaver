@@ -1,12 +1,12 @@
-# Castaway Continuum V1.0.0 installation guide
+# Castaway_Screensaver V1.0.2 installation guide
 
 ## Windows package
 
 1. Extract the complete release ZIP to a permanent folder.
-2. Keep `CastawayContinuum.exe`, `CastawayContinuum.scr`,
-   `castaway-continuum.ini`, and `data\` together.
-3. Run `CastawayContinuum.exe` to configure the display and preview changes.
-4. Right-click `CastawayContinuum.scr` and choose **Install** to select it in
+2. Keep `Castaway_Screensaver.exe`, `Castaway_Screensaver.scr`,
+   `castaway_screensaver.ini`, and `data\` together.
+3. Run `Castaway_Screensaver.exe` to configure the display and preview changes.
+4. Right-click `Castaway_Screensaver.scr` and choose **Install** to select it in
    Windows Screen Saver Settings.
 
 Windows records the selected SCR path and runs that file. The SCR opens its
@@ -37,11 +37,11 @@ have the necessary rights.
 ## Build from source
 
 Follow [BUILD-WINDOWS.md](BUILD-WINDOWS.md). For the verified embedded V1.0.0
-build, set `CASTAWAY_CONTINUUM_EMBED_DATA` to the resource folder and build the
-`castaway-continuum` package with the MSVC target.
+build, set `CASTAWAY_SCREENSAVER_EMBED_DATA` to the resource folder and build the
+`castaway_screensaver` package with the MSVC target.
 
 ## Settings
 
-`castaway-continuum.ini` is created beside the EXE/SCR. It contains display
+`castaway_screensaver.ini` is created beside the EXE/SCR. It contains display
 preferences, Favorites, and the editable `[SceneCatalog]` text. Invalid catalog
 entries fall back safely to built-in text and are reported in Custom Settings.

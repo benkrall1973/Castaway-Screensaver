@@ -1,17 +1,17 @@
 [package]
-name = "castaway-continuum"
-description = "Castaway Continuum — a modern Johnny Castaway screensaver app (winit + softbuffer)."
+name = "castaway_screensaver"
+description = "Castaway_Screensaver — a modern Johnny Castaway screensaver app (winit + softbuffer)."
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
 authors.workspace = true
-default-run = "castaway-continuum"
+default-run = "castaway_screensaver"
 
 [features]
 default = ["audio"]
 audio = ["dep:rodio"]
-# Build a self-contained binary with the original data embedded. Point CASTAWAY_CONTINUUM_EMBED_DATA
+# Build a self-contained binary with the original data embedded. Point CASTAWAY_SCREENSAVER_EMBED_DATA
 # at a dir with RESOURCE.MAP + RESOURCE.001 (+ soundN.wav), then build with this feature.
 embed-data = []
 

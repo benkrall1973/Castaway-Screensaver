@@ -9,11 +9,11 @@ members = [
 ]
 
 [workspace.package]
-version = "1.0.0"
+version = "1.0.2"
 edition = "2021"
 license = "GPL-3.0-or-later"
 repository = "https://github.com/benkrall1973/Castaway_Screensaver"
-authors = ["Castaway Continuum contributors"]
+authors = ["Castaway_Screensaver contributors"]
 
 [profile.release]
 lto = true

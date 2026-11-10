@@ -1,12 +1,12 @@
-# Castaway Continuum V1.0.0 Project Summary
+# Castaway_Screensaver V1.0.2 Project Summary
 
-**Project:** Castaway Continuum - Johnny Castaway
+**Project:** Castaway_Screensaver - Johnny Castaway
 
 **Status date:** October 15, 2026
 
 ## Purpose
 
-This project is a restoration and testing fork of **Wilson Reborn**, released as **Castaway Continuum V1.0.0**. The objective is to preserve the original screensaver's artwork, animation behavior, scene sequencing, timing, and oddities as faithfully as practical, while adding optional testing and usability controls.
+This project is a restoration and testing fork of **Wilson Reborn**, released as **Castaway_Screensaver V1.0.2**. The objective is to preserve the original screensaver's artwork, animation behavior, scene sequencing, timing, and oddities as faithfully as practical, while adding optional testing and usability controls.
 
 The work is not a replacement graphics project. Original Sierra/Dynamix artwork and sound data remain external, user-supplied assets. The engine and the project-specific enhancements are source code built around those original data files.
 
@@ -21,7 +21,7 @@ The work is not a replacement graphics project. Original Sierra/Dynamix artwork 
 
 ## License and Asset Boundaries
 
-Castaway Continuum is licensed under **GPL-3.0-or-later**. A distributed executable must be accompanied by the complete corresponding source for that executable, including any local source modifications used to build it.
+Castaway_Screensaver is licensed under **GPL-3.0-or-later**. A distributed executable must be accompanied by the complete corresponding source for that executable, including any local source modifications used to build it.
 
 The original Sierra/Dynamix resource files, artwork, music, and sound effects are not included in the public source repository and must not be redistributed without the appropriate rights. A public release can distribute the GPL source and executable, but should require users to provide their own original game data.
 
@@ -116,7 +116,7 @@ Classic behaviour remains the normal randomized experience rather than a forced 
 
 ## Application Settings
 
-The project configuration is stored in `castaway-continuum.ini`. The supported controls currently include:
+The project configuration is stored in `Castaway_Screensaver.ini`. The supported controls currently include:
 
 | Setting | Purpose |
 | --- | --- |
@@ -149,8 +149,8 @@ The current Windows release is **V1.0.0**. It includes the accepted native Displ
 Playback menus, Classic/Custom profile model, Scene Selector, island controller, and verified
 scene catalog.
 
-Windows release packages are ZIP folders. They include `CastawayContinuum.exe`,
-`CastawayContinuum.scr`, `castaway-continuum.ini`, a `data` folder, and setup instructions;
+Windows release packages are ZIP folders. They include `Castaway_Screensaver.exe`,
+`Castaway_Screensaver.scr`, `Castaway_Screensaver.ini`, a `data` folder, and setup instructions;
 they do not include original Sierra/Dynamix resources in public releases.
 Sierra/Dynamix resources. Any public GPL binary release must make its exact corresponding source
 available to recipients.
@@ -161,12 +161,12 @@ The Windows test executable is built with embedded, user-supplied original data 
 
 ```powershell
 $rustLld = 'C:\Users\<you>\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib\rustlib\x86_64-pc-windows-msvc\bin\rust-lld.exe'
-$env:CASTAWAY_CONTINUUM_EMBED_DATA = '<path-to-user-owned-original-data>'
+$env:CASTAWAY_SCREENSAVER_EMBED_DATA = '<path-to-user-owned-original-data>'
 $env:RUSTFLAGS = "-C linker=$rustLld"
-cargo build --release -p castaway-continuum --features embed-data --target x86_64-pc-windows-msvc -j 1
+cargo build --release -p castaway_screensaver --features embed-data --target x86_64-pc-windows-msvc -j 1
 ```
 
-The executable can also locate original assets externally through the current directory, next to the executable, a `data` directory, `--data <path>`, or `CASTAWAY_CONTINUUM_DATA_DIR`.
+The executable can also locate original assets externally through the current directory, next to the executable, a `data` directory, `--data <path>`, or `CASTAWAY_SCREENSAVER_DATA_DIR`.
 
 The Windows build includes the project's own distributable application icon. A local toolchain
 warning about an optional resource compiler should still be investigated, but it does not change
@@ -178,7 +178,7 @@ the executable's runtime behaviour.
 - The 63-scene selector was used to inspect a broad set of normal, day-story, night, tide, and holiday behavior.
 - Wave rendering was revalidated after the tide preference regression and rollback/recovery.
 - The project builds successfully as a Windows release executable with embedded local test data.
-- The Rust workspace passes `cargo check -p castaway-continuum` for the current source state.
+- The Rust workspace passes `cargo check -p castaway_screensaver` for the current source state.
 
 ## Remaining Work
 

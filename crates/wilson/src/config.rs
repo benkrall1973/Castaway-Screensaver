@@ -629,7 +629,7 @@ impl Config {
     /// pretending that a setting was saved when Windows refused the write.
     pub fn save(&self) -> Result<(), String> {
         let canonical = config_file().ok_or_else(|| {
-            "Castaway Continuum could not determine its settings folder.".to_owned()
+            "Castaway_Screensaver could not determine its settings folder.".to_owned()
         })?;
         self.save_to(&canonical)?;
         remove_legacy_config_files(&legacy_config_files(&canonical));
@@ -637,7 +637,7 @@ impl Config {
     }
 
     /// Load the canonical file, or migrate one known old filename exactly once.
-    /// `castaway-continuum.ini` is authoritative whenever it exists; old files can never override it.
+    /// `Castaway_Screensaver.ini` is authoritative whenever it exists; old files can never override it.
     fn load_from_paths(canonical: &Path, legacy: &[PathBuf]) -> Config {
         if let Ok(text) = std::fs::read_to_string(canonical) {
             remove_legacy_config_files(legacy);
@@ -662,7 +662,7 @@ impl Config {
     }
 
     /// Persist to an explicit path. This is kept private so callers use the
-    /// one canonical `castaway-continuum.ini` location.
+    /// one canonical `Castaway_Screensaver.ini` location.
     fn save_to(&self, path: &Path) -> Result<(), String> {
         if let Some(parent) = path.parent() {
             std::fs::create_dir_all(parent).map_err(|error| {
@@ -1015,9 +1015,9 @@ impl Config {
             })
             .collect::<String>();
         format!(
-            "; Castaway Continuum configuration. Lines beginning with ; are comments.\n\
+            "; Castaway_Screensaver configuration. Lines beginning with ; are comments.\n\
              ; Edit values after =. Examples are at the bottom.\n\
-             \n[CastawayContinuum]\n\
+             \n[Castaway_Screensaver]\n\
              ; true = window, false = fullscreen screensaver.\nwindowed={}\n\
              ; true starts a windowed display maximized.\nfull_size_window={}\n\
              ; true keeps a windowed display above normal application windows.\nalways_on_top={}\n\
@@ -1117,7 +1117,7 @@ impl Config {
             scene_catalog,
         )
         /*format!(
-            "# Castaway Continuum — configuration.\n\
+            "# Castaway_Screensaver — configuration.\n\
              # windowed: true runs in a window instead of fullscreen.\n\
              windowed={}\n\
              # mute: true disables sound effects.\n\
@@ -1491,7 +1491,7 @@ pub fn config_file() -> Option<PathBuf> {
 }
 
 fn config_file_for_executable(executable: &Path) -> Option<PathBuf> {
-    Some(executable.parent()?.join("castaway-continuum.ini"))
+    Some(executable.parent()?.join("Castaway_Screensaver.ini"))
 }
 
 /// Files written by earlier builds. The old per-user `wilson.ini` is retained as
@@ -1521,7 +1521,7 @@ fn remove_legacy_config_files(paths: &[PathBuf]) {
         // only prior settings copy is a rotten migration strategy.
         if path
             .file_name()
-            .is_some_and(|name| name == "castaway-continuum.ini")
+            .is_some_and(|name| name == "Castaway_Screensaver.ini")
         {
             continue;
         }
@@ -1660,7 +1660,7 @@ mod tests {
         let root =
             std::env::temp_dir().join(format!("wilson-catalog-migration-{}", std::process::id()));
         std::fs::create_dir_all(&root).unwrap();
-        let canonical = root.join("castaway-continuum.ini");
+        let canonical = root.join("Castaway_Screensaver.ini");
         std::fs::write(&canonical, "enabled=true\ntide=low\n").unwrap();
 
         let config = Config::load_from_paths(&canonical, &[]);
@@ -1683,7 +1683,7 @@ mod tests {
         let exe = Path::new("/opt/johnny-castaway/JohnnyCastaway");
         assert_eq!(
             config_file_for_executable(exe),
-            Some(exe.parent().unwrap().join("castaway-continuum.ini"))
+            Some(exe.parent().unwrap().join("Castaway_Screensaver.ini"))
         );
     }
 
@@ -1693,7 +1693,7 @@ mod tests {
             std::env::temp_dir().join(format!("wilson_config_migration_{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&root);
         std::fs::create_dir_all(&root).unwrap();
-        let canonical = root.join("castaway-continuum.ini");
+        let canonical = root.join("Castaway_Screensaver.ini");
         let json = root.join("config.json");
         let text = root.join("config.txt");
         std::fs::write(&json, r#"{"mute":true,"speed":200}"#).unwrap();
@@ -1718,7 +1718,7 @@ mod tests {
             std::env::temp_dir().join(format!("wilson_config_canonical_{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&root);
         std::fs::create_dir_all(&root).unwrap();
-        let canonical = root.join("castaway-continuum.ini");
+        let canonical = root.join("Castaway_Screensaver.ini");
         let json = root.join("config.json");
         std::fs::write(&canonical, "mute=true\nspeed=175\n").unwrap();
         std::fs::write(&json, r#"{"mute":false,"speed":25}"#).unwrap();

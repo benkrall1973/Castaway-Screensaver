@@ -1,6 +1,6 @@
-# Castaway Continuum fork notice
+# Castaway_Screensaver fork notice
 
-Castaway Continuum is a private GPL-3.0-or-later fork of Wilson Reborn, created
+Castaway_Screensaver is a private GPL-3.0-or-later fork of Wilson Reborn, created
 to package a focused Windows Johnny Castaway experience with the V1.0.0 identity.
 
 The repository retains the corresponding source, build scripts, packaging

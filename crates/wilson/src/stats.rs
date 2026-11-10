@@ -87,7 +87,7 @@ impl Stats {
 
     fn serialize(&self) -> String {
         format!(
-            "# Castaway Continuum — lifetime statistics.\nsessions={}\ntotal_secs={}\nmax_day={}\n",
+            "# Castaway_Screensaver — lifetime statistics.\nsessions={}\ntotal_secs={}\nmax_day={}\n",
             self.sessions, self.total_secs, self.max_day
         )
     }

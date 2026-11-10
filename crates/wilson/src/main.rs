@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-//! Castaway Continuum — the Johnny Castaway screensaver, as a live window.
+//! Castaway_Screensaver — the Johnny Castaway screensaver, as a live window.
 //!
 //! Runs the [`wilson_engine`] runtime on the **original** game data and presents each
 //! composited frame with `softbuffer` in a `winit` window. Any real key press quits;
@@ -101,13 +101,13 @@ fn fresh_run_seed() -> u64 {
 /// display has no status surface, so retain it in the debug/error stream.
 fn save_config_or_report(cfg: &config::Config) {
     if let Err(error) = cfg.save() {
-        eprintln!("[castaway-continuum] {error}");
+        eprintln!("[castaway_screensaver] {error}");
     }
 }
 
 fn report_persistence_error(result: Result<(), String>) {
     if let Err(error) = result {
-        eprintln!("[castaway-continuum] {error}");
+        eprintln!("[castaway_screensaver] {error}");
     }
 }
 
@@ -659,7 +659,7 @@ fn install_native_menu(window: &winit::window::Window, cfg: &config::Config) {
         submenu(bar, "Playback", playback, true);
 
         let about = CreatePopupMenu();
-        item(about, "About Castaway Continuum", MENU_ABOUT, false);
+        item(about, "About Castaway_Screensaver", MENU_ABOUT, false);
         submenu(bar, "About", about, true);
         if SetMenu(hwnd, bar) != 0 {
             DISPLAY_MENU_HANDLE.store(display, Ordering::Release);
@@ -835,18 +835,20 @@ fn open_custom_dialog(custom: &mut Option<Child>) {
     match std::env::current_exe() {
         Ok(exe) => match std::process::Command::new(exe)
             .arg("/c")
-            .env("CASTAWAY_CONTINUUM_CUSTOM_DIALOG", "1")
+            .env("CASTAWAY_SCREENSAVER_CUSTOM_DIALOG", "1")
             // The controller has its own persisted geometry. Explicitly set
             // the first tab so an old configuration-dialog state cannot make
             // the initial Custom window look empty or unrelated.
-            .env("CASTAWAY_CONTINUUM_SETTINGS_TAB", "0")
+            .env("CASTAWAY_SCREENSAVER_SETTINGS_TAB", "0")
             .spawn()
         {
             Ok(child) => *custom = Some(child),
-            Err(error) => eprintln!("[castaway-continuum] Could not open Custom Settings: {error}"),
+            Err(error) => {
+                eprintln!("[castaway_screensaver] Could not open Custom Settings: {error}")
+            }
         },
         Err(error) => {
-            eprintln!("[castaway-continuum] Could not locate Custom Settings executable: {error}")
+            eprintln!("[castaway_screensaver] Could not locate Custom Settings executable: {error}")
         }
     }
 }
@@ -866,7 +868,7 @@ fn open_island_location_bar(bar: &mut Option<Child>) {
     if let Ok(exe) = std::env::current_exe() {
         *bar = std::process::Command::new(exe)
             .arg("/c")
-            .env("CASTAWAY_CONTINUUM_ISLAND_LOCATION_BAR", "1")
+            .env("CASTAWAY_SCREENSAVER_ISLAND_LOCATION_BAR", "1")
             .spawn()
             .ok();
     }
@@ -946,14 +948,14 @@ fn show_native_about(window: &winit::window::Window) {
         return;
     };
     let text: Vec<u16> = format!(
-        "Castaway Continuum {}\\nJohnny Castaway restoration and testing build.\\n\\n{}\\n\\nForked from Wilson Reborn. Original artwork and data: Sierra On-Line / Dynamix.\\nEngine: GPL-3.0-or-later.",
+        "Castaway_Screensaver {}\\nJohnny Castaway restoration and testing build.\\n\\n{}\\n\\nForked from Wilson Reborn. Original artwork and data: Sierra On-Line / Dynamix.\\nEngine: GPL-3.0-or-later.",
         env!("CARGO_PKG_VERSION"),
         stats::Stats::load().summary(),
     )
     .encode_utf16()
     .chain(Some(0))
     .collect();
-    let caption: Vec<u16> = "About Castaway Continuum"
+    let caption: Vec<u16> = "About Castaway_Screensaver"
         .encode_utf16()
         .chain(Some(0))
         .collect();
@@ -1191,18 +1193,18 @@ fn main() {
         // sibling normal EXE in windowed mode so it provides the full live
         // display and existing menus rather than a cramped, incomplete clone
         // of the configuration interface.
-        Action::Configure if std::env::var_os("CASTAWAY_CONTINUUM_CUSTOM_DIALOG").is_some() => {
+        Action::Configure if std::env::var_os("CASTAWAY_SCREENSAVER_CUSTOM_DIALOG").is_some() => {
             settings_ui::open(cfg.clone());
             return;
         }
         Action::Configure => {
             if let Err(error) = launch_sibling_configuration_app() {
-                eprintln!("[castaway-continuum] {error}");
+                eprintln!("[castaway_screensaver] {error}");
             }
             return;
         }
         Action::Preview(_) if !cfg!(windows) => {
-            eprintln!("Castaway Continuum: the /p preview is only supported on Windows.");
+            eprintln!("Castaway_Screensaver: the /p preview is only supported on Windows.");
             return;
         }
         _ => {}
@@ -1417,7 +1419,7 @@ fn main() {
     }
     let preview_geometry = preview_geometry_from_env();
     let mut builder = WindowBuilder::new().with_title(format!(
-        "Castaway Continuum {} - Johnny Castaway",
+        "Castaway_Screensaver {} - Johnny Castaway",
         env!("CARGO_PKG_VERSION")
     ));
     builder = if let Some(hwnd) = preview_parent {
@@ -1522,7 +1524,7 @@ fn main() {
                             // additional way to open it.
                             let _ = std::process::Command::new(exe)
                                 .arg("/c")
-                                .env("CASTAWAY_CONTINUUM_CUSTOM_DIALOG", "1")
+                                .env("CASTAWAY_SCREENSAVER_CUSTOM_DIALOG", "1")
                                 .spawn();
                         }
                     }
@@ -2560,7 +2562,7 @@ fn print_help() {
         .unwrap_or_else(|| "(unknown location)".to_string());
 
     println!(
-        "Castaway Continuum — a modern, portable clone of the 1992 \"Johnny Castaway\" \
+        "Castaway_Screensaver — a modern, portable clone of the 1992 \"Johnny Castaway\" \
          screensaver (Sierra/Dynamix).\n"
     );
     println!("USAGE:");
@@ -2569,7 +2571,7 @@ fn print_help() {
     println!("DATA (required):");
     println!("  Needs the original files RESOURCE.MAP + RESOURCE.001 (and soundN.wav for");
     println!(
-        "  sound). Located via --data <DIR>, the CASTAWAY_CONTINUUM_DATA_DIR env var, the current"
+        "  sound). Located via --data <DIR>, the CASTAWAY_SCREENSAVER_DATA_DIR env var, the current"
     );
     println!("  directory, or next to the executable; file names match case-insensitively.\n");
     println!("OPTIONS:");
@@ -2619,8 +2621,8 @@ fn print_help() {
     println!("  {cfg_path}");
     println!("\nEXAMPLES:");
     if cfg!(windows) {
-        println!("  CastawayContinuum.scr /c         show the configuration");
-        println!("  CastawayContinuum.exe --windowed --speed 200");
+        println!("  Castaway_Screensaver.scr /c         show the configuration");
+        println!("  Castaway_Screensaver.exe --windowed --speed 200");
     } else {
         println!("  wilson --data ~/jc --filter xbr");
         println!("  wilson --windowed --speed 200 --scale integer");

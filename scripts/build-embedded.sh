@@ -314,6 +314,8 @@ mkdir -p "$OUT"
 if [ "$do_desktop" -eq 1 ]; then
     DATA_ABS="$(cd "$DATA" && pwd)"
     export WILSON_EMBED_DATA="$DATA_ABS"
+    export CASTAWAY_SCREENSAVER_EMBED_DATA="$DATA_ABS"
+    export CASTAWAY_SCREENSAVER_EMBED_DATA="$DATA_ABS"
     echo "==> Embedding data from: $DATA_ABS"
     echo "==> Output dir:          $OUT"
 
@@ -321,8 +323,8 @@ if [ "$do_desktop" -eq 1 ]; then
     echo
     echo "==> [Linux] building native embedded binary"
     [ "$alsa_ok" -eq 1 ] || echo "    (warning: ALSA dev not detected — this may fail in alsa-sys; see preflight)"
-    cargo build --release -p wilson --features embed-data --manifest-path "$ROOT/Cargo.toml"
-    cp "$ROOT/target/release/wilson" "$OUT/wilson-linux-x86_64"
+    cargo build --release -p castaway_screensaver --features embed-data --manifest-path "$ROOT/Cargo.toml"
+    cp "$ROOT/target/release/castaway_screensaver" "$OUT/wilson-linux-x86_64"
     echo "    ok -> $OUT/wilson-linux-x86_64"
 
     # --- Windows (cross via mingw-w64) --------------------------------------------
@@ -336,17 +338,17 @@ if [ "$do_desktop" -eq 1 ]; then
         # Static mingw runtime so the .exe/.scr is standalone (no libwinpthread/libgcc DLLs).
         CARGO_TARGET_X86_64_PC_WINDOWS_GNU_LINKER=x86_64-w64-mingw32-gcc \
             RUSTFLAGS="${RUSTFLAGS:-} -C target-feature=+crt-static" \
-            cargo build --release -p wilson --features embed-data \
+            cargo build --release -p castaway_screensaver --features embed-data \
             --target "$WIN_TARGET" --manifest-path "$ROOT/Cargo.toml"
-        cp "$ROOT/target/$WIN_TARGET/release/wilson.exe" "$OUT/wilson.exe"
-        cp "$OUT/wilson.exe" "$OUT/wilson.scr"
-        echo "    ok -> $OUT/wilson.exe and $OUT/wilson.scr"
+        cp "$ROOT/target/$WIN_TARGET/release/castaway_screensaver.exe" "$OUT/Castaway_Screensaver.exe"
+        cp "$OUT/Castaway_Screensaver.exe" "$OUT/Castaway_Screensaver.scr"
+        echo "    ok -> $OUT/Castaway_Screensaver.exe and $OUT/Castaway_Screensaver.scr"
     fi
 
     # --- macOS --------------------------------------------------------------------
     echo
     echo "==> [macOS] not built from Linux. On a Mac, run:"
-    echo "      WILSON_EMBED_DATA='$DATA_ABS' cargo build --release -p wilson --features embed-data"
+    echo "      CASTAWAY_SCREENSAVER_EMBED_DATA='$DATA_ABS' cargo build --release -p castaway_screensaver --features embed-data"
     echo "      # and crates/wilson-saver/macos/build-saver.sh for an embedded .saver"
 else
     echo "==> [desktop] skipped — no <data-dir> (the data-embedded desktop builds need it)."

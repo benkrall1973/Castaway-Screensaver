@@ -88,7 +88,7 @@ const SCENE_CATALOG: [SceneCatalogEntry; 63] = [
     SceneCatalogEntry { short_name: "Island Jog", description: "Johnny changes into jogging clothes, circles the island, and stretches against the tree." },
 ];
 
-/// Built-in reviewed catalog used to seed a new editable `castaway-continuum.ini` file.
+/// Built-in reviewed catalog used to seed a new editable `Castaway_Screensaver.ini` file.
 pub(crate) fn default_scene_catalog() -> (Vec<String>, Vec<String>) {
     (
         SCENE_CATALOG
@@ -180,9 +180,10 @@ fn scene_label(cfg: &Config, index: usize, ads: &str, tag: u16, day: u8) -> Stri
 }
 
 pub fn open(config: Config) {
-    let manager_shell = std::env::var_os("CASTAWAY_CONTINUUM_CUSTOM_DIALOG").is_some();
-    let island_location_bar = std::env::var_os("CASTAWAY_CONTINUUM_ISLAND_LOCATION_BAR").is_some();
-    let tab = std::env::var("CASTAWAY_CONTINUUM_SETTINGS_TAB")
+    let manager_shell = std::env::var_os("CASTAWAY_SCREENSAVER_CUSTOM_DIALOG").is_some();
+    let island_location_bar =
+        std::env::var_os("CASTAWAY_SCREENSAVER_ISLAND_LOCATION_BAR").is_some();
+    let tab = std::env::var("CASTAWAY_SCREENSAVER_SETTINGS_TAB")
         .ok()
         .and_then(|value| value.parse::<usize>().ok())
         .map(|tab| tab.min(4))
@@ -1372,7 +1373,7 @@ impl eframe::App for App {
                     ctx.send_viewport_cmd(egui::ViewportCommand::Close);
                 }
                 if self.saved {
-                    ui.label("Saved to castaway-continuum.ini");
+                    ui.label("Saved to Castaway_Screensaver.ini");
                 }
                 if let Some(status) = &self.preview_status {
                     ui.label(status);
@@ -1387,7 +1388,7 @@ impl eframe::App for App {
             1 => self.display(ui),
             2 => self.playback(ui),
             _ => {
-                ui.heading("Castaway Continuum");
+                ui.heading("Castaway_Screensaver");
                 ui.label("Settings are portable across Windows and Raspberry Pi/Linux.");
                 ui.separator();
                 ui.label("Shortcuts while Wilson is focused:");

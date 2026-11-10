@@ -1,19 +1,19 @@
-Castaway Continuum - Johnny Castaway for Windows
+Castaway_Screensaver - Johnny Castaway for Windows
 
-This package contains the GPL-licensed Castaway Continuum program, forked from Wilson Reborn. It does NOT
+This package contains the GPL-licensed Castaway_Screensaver program, forked from Wilson Reborn. It does NOT
 contain the original Sierra/Dynamix artwork, animation, music, or sound data.
 
 Quick start
 -----------
-1. Keep the package folder together: CastawayContinuum.exe, CastawayContinuum.scr,
-   castaway-continuum.ini, and
+1. Keep the package folder together: Castaway_Screensaver.exe, Castaway_Screensaver.scr,
+   Castaway_Screensaver.ini, and
    the data folder must remain beside one another.
-2. Double-click CastawayContinuum.exe to run it as a normal program.
-3. Right-click CastawayContinuum.scr and choose Install to register it with Windows as a
+2. Double-click Castaway_Screensaver.exe to run it as a normal program.
+3. Right-click Castaway_Screensaver.scr and choose Install to register it with Windows as a
    screensaver. Windows normally records and runs that exact SCR path; it does
    not copy the package to System32.
 4. Keep that folder in place. The SCR opens its sibling EXE for configuration,
-   and both share the castaway-continuum.ini beside them. If the whole folder is moved,
+   and both share the Castaway_Screensaver.ini beside them. If the whole folder is moved,
    choose Install again to update the Windows registration.
 
 Controls

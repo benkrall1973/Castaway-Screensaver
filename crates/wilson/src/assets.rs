@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 //! Loading the **original** Johnny Castaway data (`RESOURCE.MAP` + `RESOURCE.001`).
 //!
-//! Castaway Continuum plays the original game data — there is no bundled/recreated art. The
+//! Castaway_Screensaver plays the original game data — there is no bundled/recreated art. The
 //! files are located via `--data <dir>`, or auto-detected in the working directory or
 //! next to the executable.
 
@@ -29,14 +29,14 @@ pub fn load(dir: &Path) -> Result<(Archive, Palette), String> {
 }
 
 /// The directories searched for the data, in priority order: the explicit `--data`
-/// path, `$CASTAWAY_CONTINUUM_DATA_DIR`, then the working directory and the executable's directory
+/// path, `$CASTAWAY_SCREENSAVER_DATA_DIR`, then the working directory and the executable's directory
 /// (each also probed for a `data/` subdirectory).
 pub fn data_candidates(explicit: Option<&str>) -> Vec<PathBuf> {
     let mut bases: Vec<PathBuf> = Vec::new();
     if let Some(dir) = explicit {
         bases.push(PathBuf::from(dir));
     }
-    if let Some(dir) = std::env::var_os("CASTAWAY_CONTINUUM_DATA_DIR") {
+    if let Some(dir) = std::env::var_os("CASTAWAY_SCREENSAVER_DATA_DIR") {
         bases.push(PathBuf::from(dir));
     }
     if let Ok(cwd) = std::env::current_dir() {
@@ -121,8 +121,8 @@ fn extract_zip_cached(zip_path: &Path) -> Result<PathBuf, String> {
 }
 
 /// The message shown when no usable data source is found.
-const NEED_DATA_MSG: &str = "Castaway Continuum needs the original Johnny Castaway data \
-    (RESOURCE.MAP + RESOURCE.001). Pass --data <dir-or-zip>, set CASTAWAY_CONTINUUM_DATA_DIR, or place \
+const NEED_DATA_MSG: &str = "Castaway_Screensaver needs the original Johnny Castaway data \
+    (RESOURCE.MAP + RESOURCE.001). Pass --data <dir-or-zip>, set CASTAWAY_SCREENSAVER_DATA_DIR, or place \
     the files (or the Internet Archive scrantic-run.zip) in the current directory or next to \
     the executable. Get them at \
     https://archive.org/download/johnny-castaway-screensaver/scrantic-run.zip";

@@ -1,10 +1,18 @@
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
 # Changelog
 
-All notable changes to **Wilson Reborn** are recorded here. The project follows the spirit of
+All notable changes to **Castaway_Screensaver** are recorded here. The project follows the spirit of
 [Keep a Changelog](https://keepachangelog.com/); versions are git tags `vX.Y.Z`.
 
 ## [Unreleased]
+
+## [1.0.2] - 2026-11-10
+
+### Changed
+- Standardize application, settings, environment variables and release packages on Castaway_Screensaver.
+- Correct desktop embedded-build commands and clarify public repository contents.
+- Distribute rebuilt application binaries through Releases instead of the source root.
+- Earlier entries below retain the inherited development changelog.
 
 ## [0.3.18] - 2026-10-15
 

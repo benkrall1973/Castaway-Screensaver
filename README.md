@@ -1,17 +1,17 @@
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
-# Castaway Continuum
+# Castaway_Screensaver
 
-Castaway Continuum is a Windows-focused enhancement of the 1992 Johnny Castaway
+Castaway_Screensaver is a Windows-focused enhancement of the 1992 Johnny Castaway
 screensaver. It keeps the original animation and data format intact while making
 the experience easier to configure, inspect, and enjoy on modern displays.
 
 It is based on [Wilson Reborn by Antigerme](https://github.com/antigerme/wilson-reborn).
 That repository is the upstream project; this repository is the complete source
-for Castaway Continuum V1.0.0.
+for Castaway_Screensaver.
 
 ## What changed
 
-Castaway Continuum concentrates on faithful playback first, then adds controls
+Castaway_Screensaver concentrates on faithful playback first, then adds controls
 that the original screensaver never had.
 
 ### Animation and event improvements
@@ -62,14 +62,17 @@ animation filename, and the low-tide availability status. An optional on-screen
 overlay can show the current scene title and description in any display corner.
 
 Scene descriptions, short names, favorites, and settings are stored in
-`castaway-continuum.ini` beside the executable, so a user can edit the text and
+`Castaway_Screensaver.ini` beside the executable, so a user can edit the text and
 keep their preferences with the application.
 
 ## Install and run
 
+Download the latest Windows package from [Releases](https://github.com/benkrall1973/Castaway_Screensaver/releases/latest).
+Prebuilt application binaries are distributed as release downloads, not in the source root.
+
 See [INSTALL.md](INSTALL.md) for the Windows package and screensaver setup.
-Run `CastawayContinuum.exe` to configure and preview. Right-click
-`CastawayContinuum.scr` and choose **Install** to register the screensaver.
+Run `Castaway_Screensaver.exe` to configure and preview. Right-click
+`Castaway_Screensaver.scr` and choose **Install** to register the screensaver.
 
 Before running it, create a `data` folder beside the EXE and SCR and copy the
 complete contents of a lawfully obtained, already installed or extracted Johnny
@@ -79,9 +82,8 @@ itself; use the installation folder it produces.
 ## Original data is required
 
 Distributed public packages do **not** include Johnny Castaway artwork,
-animations, music, or sound effects. This private repository also retains
-original reference data and forensic material for development; do not publish
-those private files. Use the complete folder from a lawfully obtained Johnny Castaway
+animations, music, or sound effects. This repository also retains
+original reference data and forensic material for development. Use the complete folder from a lawfully obtained Johnny Castaway
 installation, including an authorized downloaded or archival installation that
 has already been extracted or installed. For the simplest setup, copy **all**
 files from that installation folder into a `data` folder beside the EXE and SCR.
@@ -99,17 +101,15 @@ The Windows application uses Rust and the MSVC toolchain. From a Developer
 PowerShell for Visual Studio:
 
 ```powershell
-$rustLld = 'C:\Users\<you>\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib\rustlib\x86_64-pc-windows-msvc\bin\rust-lld.exe'
-$env:RUSTFLAGS = "-C linker=$rustLld"
-rustup run stable-x86_64-pc-windows-msvc cargo build --release -p castaway-continuum --target x86_64-pc-windows-msvc -j 1
+rustup run stable-x86_64-pc-windows-msvc cargo build --locked --release -p castaway_screensaver --target x86_64-pc-windows-msvc
 ```
 
 The built executable is placed at
-`target\x86_64-pc-windows-msvc\release\castaway-continuum.exe`.
+`target\x86_64-pc-windows-msvc\release\castaway_screensaver.exe`.
 
 ## License and credits
 
-Castaway Continuum is GPL-3.0-or-later. The original Johnny Castaway artwork,
+Castaway_Screensaver is GPL-3.0-or-later. The original Johnny Castaway artwork,
 animation, music, and sound data remain the property of Sierra On-Line / Dynamix
-and are not redistributed here. Upstream source and project credit belong to
+and are separate from the GPL source-code license. Upstream source and project credit belong to
 [Antigerme's Wilson Reborn](https://github.com/antigerme/wilson-reborn).

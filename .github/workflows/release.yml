@@ -1,6 +1,6 @@
 name: Release
 
-# Build distributable binaries: the Windows screensaver (`CastawayContinuum.scr`), a Linux binary
+# Build distributable binaries: the Windows screensaver (`Castaway_Screensaver.scr`), a Linux binary
 # and a macOS binary. Runs on a version tag (`v*`) — attaching the files to a GitHub
 # Release with auto-generated notes (`generate_release_notes`) — and can be triggered
 # manually (`workflow_dispatch`) to download the artifacts for testing.
@@ -32,29 +32,29 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Build
-        run: cargo build --release -p castaway-continuum
+        run: cargo build --release -p castaway_screensaver
 
       - name: Package Windows folder
         # A Windows screensaver is just the executable with a .scr extension.
         # Ship an actual self-explanatory folder, not two mystery binaries.
         shell: pwsh
         run: |
-          $package = 'CastawayContinuum-Windows-x86_64'
+          $package = 'Castaway_Screensaver-Windows-x86_64'
           New-Item -ItemType Directory -Force -Path "$package/data" | Out-Null
-          Copy-Item target/release/castaway-continuum.exe "$package/CastawayContinuum.exe"
-          Copy-Item target/release/castaway-continuum.exe "$package/CastawayContinuum.scr"
-          Copy-Item castaway-continuum.ini "$package/castaway-continuum.ini"
+          Copy-Item target/release/castaway_screensaver.exe "$package/Castaway_Screensaver.exe"
+          Copy-Item target/release/castaway_screensaver.exe "$package/Castaway_Screensaver.scr"
+          Copy-Item Castaway_Screensaver.ini "$package/Castaway_Screensaver.ini"
           Copy-Item LICENSE "$package/LICENSE.txt"
           Copy-Item packaging/windows/README-WINDOWS.txt "$package/README-WINDOWS.txt"
           Copy-Item packaging/windows/data/PUT-ORIGINAL-FILES-HERE.txt "$package/data/PUT-ORIGINAL-FILES-HERE.txt"
-          Compress-Archive -Path "$package/*" -DestinationPath CastawayContinuum-Windows-x86_64.zip
+          Compress-Archive -Path "$package/*" -DestinationPath Castaway_Screensaver-Windows-x86_64.zip
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: castaway-continuum-windows
+          name: castaway_screensaver-windows
           path: |
-            CastawayContinuum-Windows-x86_64.zip
+            Castaway_Screensaver-Windows-x86_64.zip
 
       - name: Attach to release
         # Only the linux job generates the release notes (see below). If both parallel
@@ -64,7 +64,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            CastawayContinuum-Windows-x86_64.zip
+            Castaway_Screensaver-Windows-x86_64.zip
 
   linux:
     name: Linux binary
@@ -82,16 +82,16 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Build
-        run: cargo build --release -p castaway-continuum
+        run: cargo build --release -p castaway_screensaver
 
       - name: Package binary
-        run: tar -czf CastawayContinuum-linux-x86_64.tar.gz -C target/release castaway-continuum
+        run: tar -czf Castaway_Screensaver-linux-x86_64.tar.gz -C target/release castaway_screensaver
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: castaway-continuum-linux
-          path: CastawayContinuum-linux-x86_64.tar.gz
+          name: castaway_screensaver-linux
+          path: Castaway_Screensaver-linux-x86_64.tar.gz
 
       - name: Attach to release
         # Single source of the auto-generated release notes — the other jobs must NOT
@@ -100,7 +100,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          files: CastawayContinuum-linux-x86_64.tar.gz
+          files: Castaway_Screensaver-linux-x86_64.tar.gz
 
   macos:
     name: macOS binary
@@ -115,11 +115,11 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Build
-        run: cargo build --release -p castaway-continuum
+        run: cargo build --release -p castaway_screensaver
 
       - name: Package binary
         # macos-latest is Apple Silicon, so this is an arm64 binary.
-        run: tar -czf CastawayContinuum-macos-arm64.tar.gz -C target/release castaway-continuum
+        run: tar -czf Castaway_Screensaver-macos-arm64.tar.gz -C target/release castaway_screensaver
 
       - name: Build .saver bundle
         run: bash crates/wilson-saver/macos/build-saver.sh
@@ -133,7 +133,7 @@ jobs:
         with:
           name: wilson-macos
           path: |
-            CastawayContinuum-macos-arm64.tar.gz
+            Castaway_Screensaver-macos-arm64.tar.gz
             WilsonReborn.saver.zip
 
       - name: Attach to release
@@ -142,7 +142,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            CastawayContinuum-macos-arm64.tar.gz
+            Castaway_Screensaver-macos-arm64.tar.gz
             WilsonReborn.saver.zip
 
   web:

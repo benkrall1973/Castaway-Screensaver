@@ -1,4 +1,4 @@
-# Castaway Continuum V1.0.0 Windows Build Guide
+# Castaway_Screensaver V1.0.2 Windows Build Guide
 
 This guide builds the Windows desktop application from the complete GPL source in
 this repository. It does not provide, download, or redistribute the original
@@ -20,15 +20,13 @@ the repository root. The build has been tested with `rust-lld`, which is include
 with Rust.
 
 ```powershell
-$rustLld = 'C:\Users\<you>\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib\rustlib\x86_64-pc-windows-msvc\bin\rust-lld.exe'
-$env:RUSTFLAGS = "-C linker=$rustLld"
-rustup run stable-x86_64-pc-windows-msvc cargo build --release -p castaway-continuum --target x86_64-pc-windows-msvc -j 1
+rustup run stable-x86_64-pc-windows-msvc cargo build --locked --release -p castaway_screensaver --target x86_64-pc-windows-msvc
 ```
 
 The resulting application is:
 
 ```text
-target\x86_64-pc-windows-msvc\release\castaway-continuum.exe
+target\x86_64-pc-windows-msvc\release\castaway_screensaver.exe
 ```
 
 ## Run with your own data
@@ -37,11 +35,11 @@ Place your legally obtained original data beside the executable, in a `data`
 subdirectory, or point to it explicitly:
 
 ```powershell
-.\target\x86_64-pc-windows-msvc\release\castaway-continuum.exe --windowed --data C:\path\to\JohnnyCastawayData
+.\target\x86_64-pc-windows-msvc\release\castaway_screensaver.exe --windowed --data C:\path\to\JohnnyCastawayData
 ```
 
 The application looks for `RESOURCE.MAP` and `RESOURCE.001`. It can also use the
-supported original archive formats described in [INSTALL.md](INSTALL.md).
+supported original archive formats described in [INSTALL.md](../INSTALL.md).
 
 ## Personal-use embedded-data build
 
@@ -51,8 +49,8 @@ your own lawful copy and do not publish the resulting executable.
 ```powershell
 $rustLld = 'C:\Users\<you>\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib\rustlib\x86_64-pc-windows-msvc\bin\rust-lld.exe'
 $env:RUSTFLAGS = "-C linker=$rustLld"
-$env:CASTAWAY_CONTINUUM_EMBED_DATA = 'C:\path\to\your\original\data'
-rustup run stable-x86_64-pc-windows-msvc cargo build --release -p castaway-continuum --features embed-data --target x86_64-pc-windows-msvc -j 1
+$env:CASTAWAY_SCREENSAVER_EMBED_DATA = 'C:\path\to\your\original\data'
+rustup run stable-x86_64-pc-windows-msvc cargo build --release -p castaway_screensaver --features embed-data --target x86_64-pc-windows-msvc -j 1
 ```
 
 ## Checks
@@ -61,7 +59,7 @@ Run source checks before publishing a change:
 
 ```powershell
 cargo fmt --check
-cargo check -p castaway-continuum
+cargo check -p castaway_screensaver
 ```
 
 The Windows icon is optional. A warning about a missing resource compiler
