@@ -29,7 +29,7 @@
       {
         "name": "Castaway_Screensaver-web.zip",
         "bytes": 149818,
-        "digest": "sha256:e3bd94ecf01a72b7b8d5b52ea91ae35e25b974ea39f0ef53b2d364b1bc76b6c4"
+        "digest": "sha256:07929e3ada824d8fe0fe6e06db2244a55423338b3a5ffe4b80131ad93b32badc"
       },
       {
         "name": "Castaway_Screensaver-Windows-x86_64.zip",
@@ -46,7 +46,8 @@
         "bytes": 511,
         "digest": "sha256:16b36fe3db455a21c70226e665a7ec552234a00e61879736af1029799fe37508"
       }
-    ]
+    ],
+    "redundant_tag_build": "42922627926 cancelled; verified workflow-dispatch assets restored"
   },
   "audit": {
     "vulnerabilities": 0,
