@@ -6,6 +6,17 @@ All notable changes to **Castaway_Screensaver** are recorded here. The project f
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-11-10
+
+### Fixed
+- Update ZIP to 9.5.0 with only needed compression features; remove unused Zstandard test dependencies.
+- Update Wayland scanner to 0.31.11 and quick-xml to 0.41.0.
+- Add a RustSec audit gate without advisory exclusions.
+- Pin Rust 1.99.1 and enforce checked-in locks in CI and release builds.
+- Repair fork-specific installation documentation and macOS/web package names.
+- Enable the repository's GitHub Pages deployment.
+
+
 ## [1.0.2] - 2026-11-10
 
 ### Changed

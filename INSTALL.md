@@ -1,4 +1,4 @@
-# Castaway_Screensaver V1.0.2 for Windows
+# Castaway_Screensaver V1.0.3 for Windows
 
 This folder contains the Castaway_Screensaver application package:
 

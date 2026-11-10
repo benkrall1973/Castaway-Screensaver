@@ -275,7 +275,7 @@ mod tests {
         {
             let file = std::fs::File::create(&zip_path).unwrap();
             let mut w = zip::ZipWriter::new(file);
-            let opts: zip::write::FileOptions<()> = zip::write::FileOptions::default();
+            let opts = zip::write::SimpleFileOptions::default();
             w.start_file("RESOURCE.MAP", opts).unwrap();
             w.write_all(&[0u8; 32]).unwrap();
             w.start_file("RESOURCE.001", opts).unwrap();
