@@ -1,6 +1,6 @@
 # Repository consolidation — 2026-11-10
 
-The private `Castaway_Continuum` repository is the active project repository.
+The private `Castaway_Screensaver` repository is the active project repository.
 The former public and private repositories had unrelated Git histories but
 identical application source at consolidation time. Both histories are retained
 as parents of the consolidation commit.
