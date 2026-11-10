@@ -10,12 +10,13 @@ that all affected APIs were reachable from the application.
 - Test archive writers use only needed Deflate features. Unused Zstandard,
   BZip2, LZMA and encryption dependencies are removed from the lockfile.
 - Wayland scanner 0.31.11 selects quick-xml 0.41.0, fixing the reported XML issues.
+- Withdrawn clipboard-win 5.4.1 is replaced by 5.4.3.
 - Rust 1.99.1 is pinned; CI/release builds enforce the checked-in Cargo lock.
 - CI audits dependencies with cargo-audit 0.22.2. Vulnerabilities, yanked crates
   and unsoundness fail the gate. No advisory is ignored.
 
-A local scan of the updated lock found zero vulnerability and unsoundness
-records. Two unmaintained-package warnings remain: paste 1.0.15
+A full local scan of the updated lock found zero vulnerability, unsoundness
+and yanked-package records. Two unmaintained-package warnings remain: paste 1.0.15
 (RUSTSEC-2024-0436) and ttf-parser 0.25.1 (RUSTSEC-2026-0192). These are visible
 maintenance debt, not suppressed findings. Replacing them may require a separate
 GUI dependency upgrade and display testing.

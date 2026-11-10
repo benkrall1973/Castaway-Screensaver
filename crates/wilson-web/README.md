@@ -53,7 +53,7 @@ dissolves the intro→first-scene; the intro hold is `?intro_secs`, default 3 s.
 
 > **Just want to use it?** Open the **live page: <https://antigerme.github.io/wilson-reborn/>**
 > (auto-deployed from `main` via `pages.yml`) and bring your own data — nothing is uploaded.
-> Or grab **`wilson-web.zip`** from a [release](https://github.com/antigerme/wilson-reborn/releases)
+> Or grab **`Castaway_Screensaver-web.zip`** from a [release](https://github.com/benkrall1973/Castaway_Screensaver/releases)
 > (the bring-your-own bundle — no game data), unzip, serve it over HTTP, and bring your own files.
 
 ```sh
