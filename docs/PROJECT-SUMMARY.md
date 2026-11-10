@@ -1,4 +1,4 @@
-# Castaway_Screensaver V1.0.3 Project Summary
+# Castaway_Screensaver V1.0.4 Project Summary
 
 **Project:** Castaway_Screensaver - Johnny Castaway
 
@@ -6,7 +6,7 @@
 
 ## Purpose
 
-This project is a restoration and testing fork of **Wilson Reborn**, released as **Castaway_Screensaver V1.0.3**. The objective is to preserve the original screensaver's artwork, animation behavior, scene sequencing, timing, and oddities as faithfully as practical, while adding optional testing and usability controls.
+This project is a restoration and testing fork of **Wilson Reborn**, released as **Castaway_Screensaver V1.0.4**. The objective is to preserve the original screensaver's artwork, animation behavior, scene sequencing, timing, and oddities as faithfully as practical, while adding optional testing and usability controls.
 
 The work is not a replacement graphics project. Original Sierra/Dynamix artwork and sound data remain external, user-supplied assets. The engine and the project-specific enhancements are source code built around those original data files.
 
@@ -145,7 +145,7 @@ Several visual problems appear to belong to the original authored assets or scri
 
 ## Release and Build State
 
-The current Windows release is **V1.0.3**. It includes the accepted native Display and
+The current Windows release is **V1.0.4**. It includes the accepted native Display and
 Playback menus, Classic/Custom profile model, Scene Selector, island controller, and verified
 scene catalog.
 
