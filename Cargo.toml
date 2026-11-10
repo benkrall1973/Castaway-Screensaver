@@ -12,7 +12,7 @@ members = [
 version = "1.0.5"
 edition = "2021"
 license = "GPL-3.0-or-later"
-repository = "https://github.com/benkrall1973/Castaway_Screensaver"
+repository = "https://github.com/benkrall1973/Castaway-Screensaver"
 authors = ["Castaway_Screensaver contributors"]
 
 [profile.release]

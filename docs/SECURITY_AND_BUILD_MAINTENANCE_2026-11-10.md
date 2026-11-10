@@ -40,7 +40,7 @@ jobs passed for the v1.0.3 source commit. The rebuilt Windows executable also
 passed a local help-command smoke test. Archive checksums and macOS bundle
 metadata were verified before publication. See the
 [validation record](V1_0_3_VALIDATION_2026-11-10.json) and
-[v1.0.3 downloads](https://github.com/benkrall1973/Castaway_Screensaver/releases/tag/v1.0.3).
+[v1.0.3 downloads](https://github.com/benkrall1973/Castaway-Screensaver/releases/tag/v1.0.3).
 
-The [web page](https://benkrall1973.github.io/Castaway_Screensaver/) is deployed
+The [web page](https://benkrall1973.github.io/Castaway-Screensaver/) is deployed
 using this repository's Pages workflow.

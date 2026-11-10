@@ -63,4 +63,4 @@ Build
 -----
 Version: 1.0.5
 Source branch: main
-Source repository: https://github.com/benkrall1973/Castaway_Screensaver
+Source repository: https://github.com/benkrall1973/Castaway-Screensaver

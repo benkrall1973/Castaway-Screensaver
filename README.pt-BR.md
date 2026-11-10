@@ -2,7 +2,7 @@
 
 Reprodução moderna de Johnny Castaway, baseada no [Wilson Reborn de Antigerme](https://github.com/antigerme/wilson-reborn).
 
-Baixe o pacote atual em [Releases](https://github.com/benkrall1973/Castaway_Screensaver/releases/latest).
+Baixe o pacote atual em [Releases](https://github.com/benkrall1973/Castaway-Screensaver/releases/latest).
 No Windows, extraia a pasta inteira, mantenha EXE, SCR e INI juntos e coloque seus
 dados originais em `data/`. Abra `Castaway_Screensaver.exe` para configurar;
 clique com o botão direito em `Castaway_Screensaver.scr` e escolha **Instalar**.

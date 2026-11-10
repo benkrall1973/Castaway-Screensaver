@@ -3,7 +3,7 @@
 ## Windows
 
 1. Baixe `Castaway_Screensaver-Windows-x86_64.zip` e `SHA256SUMS.txt` da
-   [release atual](https://github.com/benkrall1973/Castaway_Screensaver/releases/latest).
+   [release atual](https://github.com/benkrall1973/Castaway-Screensaver/releases/latest).
 2. Confira o SHA-256 do ZIP antes de extrair: `Get-FileHash .\Castaway_Screensaver-Windows-x86_64.zip -Algorithm SHA256`.
 3. Extraia para uma pasta permanente e mantenha EXE, SCR e INI juntos.
 4. Coloque os dados originais em `data/` ao lado dos programas. Use uma instalação

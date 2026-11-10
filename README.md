@@ -67,7 +67,7 @@ keep their preferences with the application.
 
 ## Install and run
 
-Download the latest Windows package from [Releases](https://github.com/benkrall1973/Castaway_Screensaver/releases/latest).
+Download the latest Windows package from [Releases](https://github.com/benkrall1973/Castaway-Screensaver/releases/latest).
 Prebuilt application binaries are distributed as release downloads, not in the source root.
 
 See [INSTALL.md](INSTALL.md) for the Windows package and screensaver setup.
