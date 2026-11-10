@@ -300,6 +300,35 @@ mod tests {
     }
 
     #[test]
+    fn zip_cannot_write_outside_extraction_directory() {
+        let dir = tmp("zip-traversal");
+        let zip_path = dir.join("traversal.zip");
+        let marker = format!("castaway-escape-{}.txt", std::process::id());
+        let escaped = std::env::temp_dir().join(&marker);
+        assert!(!escaped.exists(), "test marker already exists");
+        {
+            let file = std::fs::File::create(&zip_path).unwrap();
+            let mut writer = zip::ZipWriter::new(file);
+            writer
+                .start_file(
+                    format!("../{marker}"),
+                    zip::write::SimpleFileOptions::default(),
+                )
+                .unwrap();
+            writer
+                .write_all(b"must stay inside extraction directory")
+                .unwrap();
+            writer.finish().unwrap();
+        }
+        // Rejection or safe containment are both acceptable; escaping is not.
+        let _ = extract_zip_cached(&zip_path);
+        assert!(
+            !escaped.exists(),
+            "archive escaped its extraction directory"
+        );
+    }
+
+    #[test]
     fn finds_real_data_when_present() {
         // Gated: only runs when WILSON_DATA_DIR points at real data.
         if std::env::var_os("WILSON_DATA_DIR").is_some() {
