@@ -194,8 +194,9 @@ the executable's runtime behaviour.
 
 This repository contains the Rust workspace, tests, build scripts, GitHub workflow
 definitions, reverse-engineering documentation, the project summary, and platform
-build instructions. It intentionally excludes original Sierra/Dynamix resource files
-and binaries that embed those files. See [BUILD-WINDOWS.md](BUILD-WINDOWS.md) and
+build instructions. Original Sierra/Dynamix reference files are retained by owner instruction;
+their rights are separate from the GPL source-code license. Downloadable
+application packages do not embed those files. See [BUILD-WINDOWS.md](BUILD-WINDOWS.md) and
 [INSTALL.md](INSTALL.md) for build and data-location guidance.
 
 ## Practical Rule Going Forward

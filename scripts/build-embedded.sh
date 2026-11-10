@@ -315,7 +315,6 @@ if [ "$do_desktop" -eq 1 ]; then
     DATA_ABS="$(cd "$DATA" && pwd)"
     export WILSON_EMBED_DATA="$DATA_ABS"
     export CASTAWAY_SCREENSAVER_EMBED_DATA="$DATA_ABS"
-    export CASTAWAY_SCREENSAVER_EMBED_DATA="$DATA_ABS"
     echo "==> Embedding data from: $DATA_ABS"
     echo "==> Output dir:          $OUT"
 

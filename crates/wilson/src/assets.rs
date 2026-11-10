@@ -100,24 +100,49 @@ fn dir_has_installer(dir: &Path) -> bool {
     find_ci(dir, "RESOURCE.00$").is_some()
 }
 
-/// Extract `zip_path` into a per-zip temp directory (reused across runs) and return it.
-fn extract_zip_cached(zip_path: &Path) -> Result<PathBuf, String> {
-    let stem = zip_path
-        .file_stem()
-        .and_then(|s| s.to_str())
-        .unwrap_or("data");
-    let len = std::fs::metadata(zip_path).map(|m| m.len()).unwrap_or(0);
-    let dest = std::env::temp_dir().join(format!("wilson-reborn-{stem}-{len}"));
-    if dir_has_usable_data(&dest) || dir_has_installer(&dest) {
-        return Ok(dest); // already extracted on a previous run
+/// Length-framed content hashes distinguish changed archives and installer components.
+fn content_key(parts: &[&[u8]]) -> String {
+    use sha2::{Digest, Sha256};
+    let mut hash = Sha256::new();
+    for part in parts {
+        hash.update((part.len() as u64).to_le_bytes());
+        hash.update(part);
     }
-    let file = std::fs::File::open(zip_path).map_err(|e| format!("{}: {e}", zip_path.display()))?;
-    let mut zip = zip::ZipArchive::new(file)
+    format!("{:x}", hash.finalize())
+}
+
+/// Only completed, usable directories may be reused. New output is staged privately.
+fn cache_ready(path: &Path) -> bool {
+    path.join(".complete").is_file() && (dir_has_usable_data(path) || dir_has_installer(path))
+}
+
+fn publish_cache(stage: tempfile::TempDir, destination: &Path) -> Result<PathBuf, String> {
+    std::fs::write(stage.path().join(".complete"), b"v1").map_err(|e| e.to_string())?;
+    match std::fs::rename(stage.path(), destination) {
+        Ok(()) => Ok(destination.to_path_buf()),
+        Err(_) if cache_ready(destination) => Ok(destination.to_path_buf()),
+        // An incomplete old cache or a competing process must not destroy our valid output.
+        Err(_) => Ok(stage.keep()),
+    }
+}
+
+/// Hash and extract the same immutable snapshot, not its name or byte count.
+fn extract_zip_cached(zip_path: &Path) -> Result<PathBuf, String> {
+    let bytes = std::fs::read(zip_path).map_err(|e| format!("{}: {e}", zip_path.display()))?;
+    let key = content_key(&[b"zip-v2", &bytes]);
+    let destination = std::env::temp_dir().join(format!("castaway-screensaver-zip-{key}"));
+    if cache_ready(&destination) {
+        return Ok(destination);
+    }
+    let mut zip = zip::ZipArchive::new(std::io::Cursor::new(bytes))
         .map_err(|e| format!("{}: not a readable zip: {e}", zip_path.display()))?;
-    std::fs::create_dir_all(&dest).map_err(|e| e.to_string())?;
-    zip.extract(&dest)
+    let stage = tempfile::Builder::new()
+        .prefix("castaway-screensaver-zip-")
+        .tempdir()
+        .map_err(|e| e.to_string())?;
+    zip.extract(stage.path())
         .map_err(|e| format!("extracting {}: {e}", zip_path.display()))?;
-    Ok(dest)
+    publish_cache(stage, &destination)
 }
 
 /// The message shown when no usable data source is found.
@@ -155,28 +180,35 @@ fn prepare_installer(dir: &Path) -> Result<PathBuf, String> {
         .ok_or_else(|| "installer is missing RESOURCE.MAP".to_string())?;
     let r00 = find_ci(dir, "RESOURCE.00$")
         .ok_or_else(|| "installer is missing RESOURCE.00$".to_string())?;
-    let len = std::fs::metadata(&r00).map(|m| m.len()).unwrap_or(0);
-    let dest = std::env::temp_dir().join(format!("wilson-reborn-installer-{len}"));
-    if dir_has_usable_data(&dest) {
-        return Ok(dest); // already decompressed on a previous run
+    let map_bytes = std::fs::read(map).map_err(|e| format!("RESOURCE.MAP: {e}"))?;
+    let comp = std::fs::read(r00).map_err(|e| format!("RESOURCE.00$: {e}"))?;
+    let sound = find_ci(dir, "SCRANTIC.SC$")
+        .map(std::fs::read)
+        .transpose()
+        .map_err(|e| format!("SCRANTIC.SC$: {e}"))?;
+    let key = content_key(&[
+        b"installer-v2",
+        &map_bytes,
+        &comp,
+        sound.as_deref().unwrap_or(&[]),
+    ]);
+    let destination = std::env::temp_dir().join(format!("castaway-screensaver-installer-{key}"));
+    if cache_ready(&destination) {
+        return Ok(destination);
     }
-    std::fs::create_dir_all(&dest).map_err(|e| e.to_string())?;
-    std::fs::copy(&map, dest.join("RESOURCE.MAP")).map_err(|e| format!("RESOURCE.MAP: {e}"))?;
-    let comp = std::fs::read(&r00).map_err(|e| format!("RESOURCE.00$: {e}"))?;
     let data = wilson_dgds::decompress_installer(&comp).ok_or_else(|| {
         "RESOURCE.00$: unexpected installer compression (could not decompress)".to_string()
     })?;
-    std::fs::write(dest.join("RESOURCE.001"), &data).map_err(|e| e.to_string())?;
-    // Sound: the effects are WAVs inside the (also compressed) executable.
-    if let Some(scc) = find_ci(dir, "SCRANTIC.SC$") {
-        if let Some(exe) = std::fs::read(&scc)
-            .ok()
-            .and_then(|c| wilson_dgds::decompress_installer(&c))
-        {
-            let _ = std::fs::write(dest.join("SCRANTIC.SCR"), exe);
-        }
+    let stage = tempfile::Builder::new()
+        .prefix("castaway-screensaver-installer-")
+        .tempdir()
+        .map_err(|e| e.to_string())?;
+    std::fs::write(stage.path().join("RESOURCE.MAP"), map_bytes).map_err(|e| e.to_string())?;
+    std::fs::write(stage.path().join("RESOURCE.001"), data).map_err(|e| e.to_string())?;
+    if let Some(exe) = sound.and_then(|c| wilson_dgds::decompress_installer(&c)) {
+        std::fs::write(stage.path().join("SCRANTIC.SCR"), exe).map_err(|e| e.to_string())?;
     }
-    Ok(dest)
+    publish_cache(stage, &destination)
 }
 
 /// Candidate data paths (folders and zips), in priority order. Reuses [`data_candidates`]
@@ -326,6 +358,52 @@ mod tests {
             !escaped.exists(),
             "archive escaped its extraction directory"
         );
+    }
+
+    #[test]
+    fn changed_same_size_zip_does_not_reuse_old_data() {
+        let first = tmp("cache-first").join("same.zip");
+        let second = tmp("cache-second").join("same.zip");
+        for (path, value) in [(&first, 3u8), (&second, 9u8)] {
+            let file = std::fs::File::create(path).unwrap();
+            let mut zip = zip::ZipWriter::new(file);
+            let options = zip::write::SimpleFileOptions::default()
+                .compression_method(zip::CompressionMethod::Stored);
+            zip.start_file("RESOURCE.MAP", options).unwrap();
+            zip.write_all(&[0; 32]).unwrap();
+            zip.start_file("RESOURCE.001", options).unwrap();
+            zip.write_all(&vec![value; 2000]).unwrap();
+            zip.finish().unwrap();
+        }
+        assert_eq!(
+            std::fs::metadata(&first).unwrap().len(),
+            std::fs::metadata(&second).unwrap().len()
+        );
+        let a = extract_zip_cached(&first).unwrap();
+        let b = extract_zip_cached(&second).unwrap();
+        assert_ne!(a, b);
+        assert_eq!(
+            std::fs::read(a.join("RESOURCE.001")).unwrap(),
+            vec![3; 2000]
+        );
+        assert_eq!(
+            std::fs::read(b.join("RESOURCE.001")).unwrap(),
+            vec![9; 2000]
+        );
+        assert_eq!(b, extract_zip_cached(&second).unwrap());
+    }
+
+    #[test]
+    fn installer_cache_key_covers_map_data_and_sound() {
+        let original = content_key(&[b"map", b"data", b"sound"]);
+        for parts in [
+            [&b"MAP"[..], &b"data"[..], &b"sound"[..]],
+            [&b"map"[..], &b"DATA"[..], &b"sound"[..]],
+            [&b"map"[..], &b"data"[..], &b"SOUND"[..]],
+        ] {
+            assert_ne!(original, content_key(&parts));
+        }
+        assert_ne!(content_key(&[b"ab", b"c"]), content_key(&[b"a", b"bc"]));
     }
 
     #[test]

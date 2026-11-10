@@ -6,6 +6,16 @@ All notable changes to **Castaway_Screensaver** are recorded here. The project f
 
 ## [Unreleased]
 
+## [1.0.4] - 2026-11-10
+
+### Fixed
+- Key archive/installer caches by SHA-256 content, including map and sound inputs.
+- Stage extraction privately and reuse only completed caches.
+- Publish releases once from a fully verified draft after all artifacts and checksums exist.
+- Refuse mutation of already published releases and require passing CI for the exact source commit.
+- Correct source-contents documentation and remove a duplicate environment export.
+
+
 ## [1.0.3] - 2026-11-10
 
 ### Fixed

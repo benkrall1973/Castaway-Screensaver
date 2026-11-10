@@ -24,6 +24,8 @@ rodio = { version = "0.17", default-features = false, features = ["wav"], option
 # Read-only zip support so `--data` can take the Internet Archive scrantic-run.zip directly.
 zip = { version = "=9.5.0", default-features = false, features = ["deflate"] }
 serde_json = "1"
+sha2 = "0.10"
+tempfile = "3"
 eframe = { version = "0.29", default-features = false, features = ["default_fonts", "glow", "x11", "wayland"] }
 
 # Used by build.rs: wilson-dgds to extract the original sounds (embed-data) and decompress

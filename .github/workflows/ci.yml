@@ -185,3 +185,13 @@ jobs:
         run: cargo install cargo-audit --version 0.22.2 --locked
       - name: Audit checked-in dependency lock
         run: cargo audit --deny yanked --deny unsound
+
+  release-publication-tests:
+    name: Release publication regression checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s scripts/tests -v

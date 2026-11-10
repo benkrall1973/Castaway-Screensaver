@@ -10,7 +10,12 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write # needed to create/update the GitHub Release on a tag
+  contents: read
+  actions: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
 
 env:
   CARGO_TERM_COLOR: always
@@ -56,16 +61,6 @@ jobs:
           path: |
             Castaway_Screensaver-Windows-x86_64.zip
 
-      - name: Attach to release
-        # Only the linux job generates the release notes (see below). If both parallel
-        # jobs set `generate_release_notes`, action-gh-release appends the changelog
-        # twice. This job just adds its files to the (shared, tag-keyed) release.
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            Castaway_Screensaver-Windows-x86_64.zip
-
   linux:
     name: Linux binary
     runs-on: ubuntu-latest
@@ -92,15 +87,6 @@ jobs:
         with:
           name: castaway_screensaver-linux
           path: Castaway_Screensaver-linux-x86_64.tar.gz
-
-      - name: Attach to release
-        # Single source of the auto-generated release notes — the other jobs must NOT
-        # also set `generate_release_notes`, or the changelog gets duplicated.
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-          files: Castaway_Screensaver-linux-x86_64.tar.gz
 
   macos:
     name: macOS binary
@@ -133,15 +119,6 @@ jobs:
         with:
           name: wilson-macos
           path: |
-            Castaway_Screensaver-macos-arm64.tar.gz
-            Castaway_Screensaver.saver.zip
-
-      - name: Attach to release
-        # No `generate_release_notes` here — the linux job is the sole notes generator.
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
             Castaway_Screensaver-macos-arm64.tar.gz
             Castaway_Screensaver.saver.zip
 
@@ -194,13 +171,6 @@ jobs:
           name: wilson-web
           path: Castaway_Screensaver-web.zip
 
-      - name: Attach to release
-        # No `generate_release_notes` here — the linux job is the sole notes generator.
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: Castaway_Screensaver-web.zip
-
   checksums:
     name: Checksums (SHA-256)
     # Runs after every artifact-producing job so it can hash them all into one file. Lets users
@@ -212,6 +182,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: artifacts
+          merge-multiple: true
 
       - name: Generate SHA256SUMS.txt
         # One line per distributable file, using basenames so `sha256sum -c SHA256SUMS.txt`
@@ -228,9 +199,24 @@ jobs:
           name: SHA256SUMS
           path: SHA256SUMS.txt
 
-      - name: Attach to release
-        # No `generate_release_notes` here — the linux job is the sole notes generator.
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
+  publish:
+    name: Publish verified release once
+    needs: checksums
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
         with:
-          files: SHA256SUMS.txt
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Verify complete assets and publish from draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/publish-release.py dist
