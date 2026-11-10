@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: Install Rust toolchain (+ wasm32 target)
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@1.99.1
         with:
           targets: wasm32-unknown-unknown
 

@@ -5,21 +5,21 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleExecutable</key>
-    <string>WilsonReborn</string>
+    <string>Castaway_Screensaver</string>
     <key>CFBundleIconFile</key>
     <string>wilson</string>
     <key>CFBundleIdentifier</key>
-    <string>com.felicio.wilson-reborn</string>
+    <string>com.benkrall1973.castaway-screensaver</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>Wilson Reborn</string>
+    <string>Castaway_Screensaver</string>
     <key>CFBundlePackageType</key>
     <string>BNDL</string>
     <key>CFBundleShortVersionString</key>
-    <string>0.1.0</string>
+    <string>1.0.2</string>
     <key>CFBundleVersion</key>
-    <string>0.1.0</string>
+    <string>1.0.2</string>
     <key>LSMinimumSystemVersion</key>
     <string>11.0</string>
     <!-- The ScreenSaver framework instantiates this class. -->

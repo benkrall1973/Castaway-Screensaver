@@ -72,8 +72,8 @@ static const size_t kH = 480;
             NSForegroundColorAttributeName : [NSColor whiteColor],
             NSFontAttributeName : [NSFont systemFontOfSize:(self.isPreview ? 9.0 : 18.0)]
         };
-        NSString *msg = @"Wilson Reborn — place the original RESOURCE.MAP + RESOURCE.001 in\n"
-                        @"~/Library/Application Support/WilsonReborn/";
+        NSString *msg = @"Castaway_Screensaver — place the original RESOURCE.MAP + RESOURCE.001 in\n"
+                        @"~/Library/Application Support/Castaway_Screensaver/";
         [msg drawInRect:NSInsetRect(b, 16, 16) withAttributes:attrs];
         return;
     }

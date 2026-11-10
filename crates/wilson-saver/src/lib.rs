@@ -7,8 +7,8 @@
 //! create a context, pull 640×480 RGBA frames, free it.
 //!
 //! Data: a screensaver can't take `--data`, so the context looks for the original game
-//! files (`RESOURCE.MAP` + data) in `$WILSON_DATA_DIR` and then
-//! `~/Library/Application Support/WilsonReborn/`. (A future `embed-data` variant can bake
+//! files (`RESOURCE.MAP` + data) in `$CASTAWAY_SCREENSAVER_DATA_DIR` and then
+//! `~/Library/Application Support/Castaway_Screensaver/`. (A future `embed-data` variant can bake
 //! them in for personal all-in-one builds.)
 
 use std::path::PathBuf;
@@ -38,14 +38,14 @@ fn data_dirs_from(data_env: Option<PathBuf>, home: Option<PathBuf>) -> Vec<PathB
         dirs.push(d);
     }
     if let Some(h) = home {
-        dirs.push(h.join("Library/Application Support/WilsonReborn"));
+        dirs.push(h.join("Library/Application Support/Castaway_Screensaver"));
     }
     dirs
 }
 
 fn data_dirs() -> Vec<PathBuf> {
     data_dirs_from(
-        std::env::var_os("WILSON_DATA_DIR").map(PathBuf::from),
+        std::env::var_os("CASTAWAY_SCREENSAVER_DATA_DIR").map(PathBuf::from),
         std::env::var_os("HOME").map(PathBuf::from),
     )
 }
@@ -154,7 +154,7 @@ mod tests {
         assert_eq!(dirs[0], PathBuf::from("/explicit")); // explicit override first
         assert_eq!(
             dirs[1],
-            PathBuf::from("/home/u/Library/Application Support/WilsonReborn")
+            PathBuf::from("/home/u/Library/Application Support/Castaway_Screensaver")
         );
         // No HOME → only the explicit dir; no env → empty.
         assert_eq!(data_dirs_from(Some(PathBuf::from("/x")), None).len(), 1);
@@ -176,13 +176,16 @@ mod tests {
 
     #[test]
     fn new_and_frame_with_real_data() {
-        // Gated on the original data (skipped in CI). Uses $WILSON_DATA_DIR via data_dirs.
-        if std::env::var_os("WILSON_DATA_DIR").is_none() {
-            eprintln!("WILSON_DATA_DIR not set — skipping FFI real-data test");
+        // Gated on the original data (skipped in CI). Uses $CASTAWAY_SCREENSAVER_DATA_DIR via data_dirs.
+        if std::env::var_os("CASTAWAY_SCREENSAVER_DATA_DIR").is_none() {
+            eprintln!("CASTAWAY_SCREENSAVER_DATA_DIR not set — skipping FFI real-data test");
             return;
         }
         let ctx = wilson_saver_new();
-        assert!(!ctx.is_null(), "expected to load data from WILSON_DATA_DIR");
+        assert!(
+            !ctx.is_null(),
+            "expected to load data from CASTAWAY_SCREENSAVER_DATA_DIR"
+        );
         let mut buf = vec![0u8; FRAME_BYTES];
         unsafe {
             let delay = wilson_saver_next_frame(ctx, buf.as_mut_ptr(), buf.len());

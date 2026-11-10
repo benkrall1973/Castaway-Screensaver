@@ -45,7 +45,7 @@ else
 fi
 
 echo "[1/2] cargo build ($profile) → $target"
-cargo build $flag --target "$target" -p wilson-web "${feat[@]}"
+cargo build --locked $flag --target "$target" -p wilson-web "${feat[@]}"
 
 wasm="../../target/$target/$profile/wilson_web.wasm"
 echo "[2/2] wasm-bindgen → web/"

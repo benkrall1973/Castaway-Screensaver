@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Build the macOS `WilsonReborn.saver` bundle: the Rust `wilson-saver` staticlib linked
+# Build the macOS `Castaway_Screensaver.saver` bundle: the Rust `wilson-saver` staticlib linked
 # into an Obj-C ScreenSaverView. Run on macOS with Xcode command-line tools + a Rust
-# toolchain. Output: <out>/WilsonReborn.saver (default: target/saver/).
+# toolchain. Output: <out>/Castaway_Screensaver.saver (default: target/saver/).
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" # crates/wilson-saver/macos
 ROOT="$(cd "$DIR/../../.." && pwd)"                 # repo root
 OUT="${1:-$ROOT/target/saver}"
-NAME="WilsonReborn"
+NAME="Castaway_Screensaver"
 BUNDLE="$OUT/$NAME.saver"
 
 echo "==> Building Rust staticlib (release)"
-cargo build --release -p wilson-saver --manifest-path "$ROOT/Cargo.toml"
+cargo build --locked --release -p wilson-saver --manifest-path "$ROOT/Cargo.toml"
 STATICLIB="$ROOT/target/release/libwilson_saver.a"
 [ -f "$STATICLIB" ] || {
   echo "missing staticlib: $STATICLIB" >&2
