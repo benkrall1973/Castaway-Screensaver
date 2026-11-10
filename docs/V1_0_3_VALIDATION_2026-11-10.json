@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-10",
+  "version": "1.0.3",
+  "source_commit": "61469e8f42cbf7714b27429324ab0f01e5e3113a",
+  "ci": {
+    "url": "https://github.com/benkrall1973/Castaway_Screensaver/actions/runs/42922028341",
+    "conclusion": "success",
+    "jobs_passed": 7
+  },
+  "release_build": {
+    "url": "https://github.com/benkrall1973/Castaway_Screensaver/actions/runs/42922030874",
+    "conclusion": "success",
+    "jobs_passed": 5
+  },
+  "release": {
+    "url": "https://github.com/benkrall1973/Castaway_Screensaver/releases/tag/v1.0.3",
+    "tag": "v1.0.3",
+    "assets": [
+      {
+        "name": "Castaway_Screensaver-linux-x86_64.tar.gz",
+        "bytes": 4254090,
+        "digest": "sha256:29d8c379ab220e1a11d242385453b927239c8b6c3821e7fa0438c1eac97670d4"
+      },
+      {
+        "name": "Castaway_Screensaver-macos-arm64.tar.gz",
+        "bytes": 2456103,
+        "digest": "sha256:3a5a518db4acb6eba19829ccff63ce30ccb23ab3b23f9352d1ada0eb2fd0afea"
+      },
+      {
+        "name": "Castaway_Screensaver-web.zip",
+        "bytes": 149818,
+        "digest": "sha256:e3bd94ecf01a72b7b8d5b52ea91ae35e25b974ea39f0ef53b2d364b1bc76b6c4"
+      },
+      {
+        "name": "Castaway_Screensaver-Windows-x86_64.zip",
+        "bytes": 5450625,
+        "digest": "sha256:e42110d41397ffffd13c8673c566a5acb8b75a1d1ab731454e8daad6b49a4b78"
+      },
+      {
+        "name": "Castaway_Screensaver.saver.zip",
+        "bytes": 778179,
+        "digest": "sha256:032ea35eaef01de154a340778e5e37d2f9ca789a3f79d5fc7693b516c3d899c3"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "bytes": 511,
+        "digest": "sha256:16b36fe3db455a21c70226e665a7ec552234a00e61879736af1029799fe37508"
+      }
+    ]
+  },
+  "audit": {
+    "vulnerabilities": 0,
+    "unsound": 0,
+    "yanked": 0,
+    "unmaintained": [
+      {
+        "package": "paste",
+        "version": "1.0.15",
+        "advisory": "RUSTSEC-2024-0436"
+      },
+      {
+        "package": "ttf-parser",
+        "version": "0.25.1",
+        "advisory": "RUSTSEC-2026-0192"
+      }
+    ]
+  },
+  "pages": {
+    "url": "https://benkrall1973.github.io/Castaway_Screensaver/",
+    "deployment_run": "https://github.com/benkrall1973/Castaway_Screensaver/actions/runs/42922028219"
+  },
+  "local_checks": [
+    "Archive checksums verified against generated SHA256SUMS",
+    "Windows EXE/SCR contents identical",
+    "Windows EXE --help successful",
+    "macOS bundle executable and version verified",
+    "Fresh online clone, links, branding and dependency pins checked"
+  ],
+  "limitations": [
+    "No graphical Windows screensaver installation or macOS runtime acceptance performed in this maintenance pass",
+    "Two unmaintained dependency warnings remain visible"
+  ]
+}
