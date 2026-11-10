@@ -347,6 +347,7 @@ fn resolve_zip(bytes: &[u8]) -> Result<ZipData, String> {
         }
         let name = f
             .name()
+            .map_err(|e| format!("zip entry {i} filename: {e}"))?
             .rsplit(['/', '\\'])
             .next()
             .unwrap_or("")
