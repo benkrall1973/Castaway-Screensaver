@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-10",
+  "version": "1.0.5",
+  "source_commit": "8c3675afb63f72faa49ac43b382e2c69fd3abb52",
+  "ci": {
+    "url": "https://github.com/benkrall1973/Castaway_Screensaver/actions/runs/42924481164",
+    "conclusion": "success",
+    "jobs_passed": 8
+  },
+  "release_build": {
+    "url": "https://github.com/benkrall1973/Castaway_Screensaver/actions/runs/42924487909",
+    "conclusion": "success",
+    "jobs_passed": 6,
+    "attempt": 2
+  },
+  "release": {
+    "url": "https://github.com/benkrall1973/Castaway_Screensaver/releases/tag/v1.0.5",
+    "tag": "v1.0.5",
+    "assets": [
+      {
+        "name": "Castaway_Screensaver-linux-x86_64.tar.gz",
+        "bytes": 4263181,
+        "digest": "sha256:ea6b95daa6a4cdd40e2a7f116bc5b74459b648cbca474cfd69eb3e631638c5ff"
+      },
+      {
+        "name": "Castaway_Screensaver-macos-arm64.tar.gz",
+        "bytes": 2466649,
+        "digest": "sha256:15c90d8b22c16741f03148a9e57c1b90e3c3b3a362fa74f366dd11c8970c1cb5"
+      },
+      {
+        "name": "Castaway_Screensaver-web.zip",
+        "bytes": 149822,
+        "digest": "sha256:db6101d6d8fe38f08041148bba453b01abd44e51466d3b29c36a5c830e3af2f3"
+      },
+      {
+        "name": "Castaway_Screensaver-Windows-x86_64.zip",
+        "bytes": 5479905,
+        "digest": "sha256:4d6416d827a7ceb7ec50db032c3fa47490c67791ee7876a03b6e557c0d18bc74"
+      },
+      {
+        "name": "Castaway_Screensaver.saver.zip",
+        "bytes": 778123,
+        "digest": "sha256:832b262bb90faafa97752ed34849187b53300c2be1d0af4eb4379ceeab942379"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "bytes": 511,
+        "digest": "sha256:e7effc9d88c27347110788b03a5b9a748bf362764e111782e88dab2117d6d02e"
+      }
+    ]
+  },
+  "repairs": [
+    "Content-based SHA-256 ZIP/installer cache identity",
+    "Private staging and completed-cache marker",
+    "Single verified-draft publisher after complete artifact set",
+    "Published release immutability and exact-commit CI gate",
+    "Source contents documentation and duplicate export"
+  ],
+  "checks": [
+    "Same-name/same-size ZIP content regression",
+    "Installer map/data/sound key regressions",
+    "Five publisher regression tests",
+    "Downloaded release hashes and SHA256SUMS",
+    "Windows EXE/SCR equality and native EXE help",
+    "macOS bundle version"
+  ],
+  "audit": {
+    "vulnerabilities": 0,
+    "unsound": 0,
+    "yanked": 0,
+    "unmaintained": [
+      "paste 1.0.15",
+      "ttf-parser 0.25.1"
+    ]
+  },
+  "limits": [
+    "No graphical screensaver install/playback acceptance performed during maintenance",
+    "v1.0.4 candidate tag retained; superseded before publication",
+    "Publisher safely refused early publication until exact-commit CI finished; retry then passed"
+  ]
+}
