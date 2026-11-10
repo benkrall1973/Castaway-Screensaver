@@ -6,7 +6,10 @@ All notable changes to **Castaway_Screensaver** are recorded here. The project f
 
 ## [Unreleased]
 
-## [1.0.4] - 2026-11-10
+## [1.0.5] - 2026-11-10
+
+The v1.0.4 candidate was superseded before publication while updating an inherited
+workflow regression test to enforce the new single-publisher contract.
 
 ### Fixed
 - Key archive/installer caches by SHA-256 content, including map and sound inputs.

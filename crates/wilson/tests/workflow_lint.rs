@@ -11,17 +11,22 @@ fn workflow(name: &str) -> String {
     std::fs::read_to_string(&path).unwrap_or_else(|e| panic!("read {}: {e}", path.display()))
 }
 
-/// Regression guard for the v0.1.1 changelog duplication: if more than one release job
-/// sets `generate_release_notes`, `action-gh-release` appends the changelog once per job.
+/// Producers must never mutate a live release; one publisher runs after checksums.
 #[test]
-fn release_generates_notes_in_exactly_one_job() {
+fn release_has_one_publisher_after_complete_artifacts() {
     let yml = workflow("release.yml");
-    let n = yml.matches("generate_release_notes: true").count();
+    assert!(!yml.contains("softprops/action-gh-release"));
     assert_eq!(
-        n, 1,
-        "exactly one release job may set `generate_release_notes: true` (found {n}); \
-         more than one duplicates the changelog in the GitHub Release"
+        yml.matches("python scripts/publish-release.py dist")
+            .count(),
+        1
     );
+    let publisher = yml.split("  publish:").nth(1).expect("publisher job");
+    assert!(publisher.contains("needs: checksums"));
+    assert!(publisher.contains("if: startsWith(github.ref, 'refs/tags/')"));
+    assert!(publisher.contains("contents: write"));
+    let producers = yml.split("  publish:").next().unwrap();
+    assert!(!producers.contains("contents: write"));
 }
 
 /// Both workflows must opt JS actions into Node 24. Node 20 is deprecated — GitHub forces

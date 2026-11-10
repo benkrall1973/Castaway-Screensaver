@@ -1,4 +1,4 @@
-# Castaway_Screensaver V1.0.4 Windows Build Guide
+# Castaway_Screensaver V1.0.5 Windows Build Guide
 
 This guide builds the Windows desktop application from the complete GPL source in
 this repository. It does not provide, download, or redistribute the original
